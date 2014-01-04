@@ -13,7 +13,7 @@ int tputs_putchar(int c)
 int main(void)
 {
 	char			buffer[2048];
-	struct termios	term;
+	struct			termios	term;
 	char			read_char[4] = {0};
 
 	if (tgetent(buffer, getenv("TERM")) < 1)
@@ -22,6 +22,7 @@ int main(void)
 	term.c_lflag &= ICANON; /* each char is treated independently */
 	term.c_lflag &= ECHO; /* prevents a char from being output when pressed*/
 	tcsetattr(0, 0, &term);
+	tputs(tgetstr("ti", NULL), 1, tputs_putchar);
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar); /* turns on reverse video */
 	write(1, "reverse video", 13);
 	tputs(tgetstr("me", NULL), 1, tputs_putchar); /* turns off all */
@@ -31,11 +32,22 @@ int main(void)
 	while (1)
 	{
 		read(0, read_char, 3);
+		if (is_bgreq(read_char))
+		{
+			printf("Todo : put in background");
+			/*
+			term.c_lflag |= ICANON;
+			term.c_lflag |= ECHO;
+			tcsetattr(0, 0, &term);
+			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+			*/
+		}
 		if (is_rtn(read_char))
 		{
 			term.c_lflag |= ICANON;
 			term.c_lflag |= ECHO;
 			tcsetattr(0, 0, &term); /* back to default values */
+			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
 			return (1);
 		}
 		if (is_arrow(read_char))
@@ -64,6 +76,14 @@ int	is_arrow(char *buf)
 		return (3);
 	if (buf[2] == 68)
 		return (4);
+	else
+		return (0);
+}
+
+int	is_bgreq(char *buf)
+{
+	if (buf[0] == 26)
+		return (1);
 	else
 		return (0);
 }
