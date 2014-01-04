@@ -25,24 +25,30 @@ int main(void)
 	tputs(tgetstr("mr", NULL), 1, tputs_putchar); /* turns on reverse video */
 	write(1, "reverse video", 13);
 	tputs(tgetstr("me", NULL), 1, tputs_putchar); /* turns off all */
-		read(0, read_char, 3);
 	tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
 	write(1, "normal", 7);
 	tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
-	while (read_char[0] != 27)
+	while (1)
 	{
 		read(0, read_char, 3);
-		printf("%d %d %d\n", read_char[0], read_char[1], read_char[2]);
+		if (is_rtn(read_char))
+		{
+			term.c_lflag |= ICANON;
+			term.c_lflag |= ECHO;
+			tcsetattr(0, 0, &term); /* back to default values */
+			return (1);
+		}
+		if (is_arrow(read_char))
+			printf("Todo\n");
+		else
+			printf("%d %d %d\n", read_char[0], read_char[1], read_char[2]);
 	}
-	term.c_lflag |= ICANON;
-	term.c_lflag |= ECHO;
-	tcsetattr(0, 0, &term); /* back to default values */
 	return (0);
 }
 
 int	is_rtn(char *buf)
 {
-	return (buf[0] == 10 && buf[1] == 0 && buf[2] == 0);
+	return (buf[0] == 10);
 }
 
 int	is_arrow(char *buf)
