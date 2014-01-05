@@ -6,14 +6,13 @@
 #    By: lfouquet <lfouquet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/04 15:23:59 by lfouquet          #+#    #+#              #
-#    Updated: 2014/01/05 16:59:40 by sboeuf           ###   ########.fr        #
-#                                                                              #
+#    Updated: 2014/01/05 17:00:22 by sboeuf           ###   ########.fr        #
 # **************************************************************************** #
 
 CC			= gcc
 NAME		= ft_select
 
-SRC			= 	test_clara_morgane.c
+SRC			= 	main.c
 
 CFLAGS		= -Wall -Werror -Wextra -ltermcap
 
