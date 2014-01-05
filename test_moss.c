@@ -73,6 +73,77 @@ void				ft_putstr(char *str)
 	write(1, str, ft_strlen(str));
 }
 
+int					is_rtn(char *buf)
+{
+	return (buf[0] == 10);
+}
+
+int					is_arrow(char *buf, t_elem *ptr)
+{
+	int				rslt;
+
+	printf("[?] %s\n", ptr->data);
+	tputs(tgetstr("up", NULL), 1, tputs_putchar);
+	if (buf[0] != 27 || buf[1] != 91)
+		return (0);
+	if (buf[2] == 65)
+	{
+		if (ptr->index - ptr->prev->index != 1)
+		{
+			rslt = ptr->prev->index;
+			while (ptr->index != rslt)
+			{
+				tputs(tgetstr("do", NULL), 1, tputs_putchar);
+				ptr = ptr->next;
+			}
+		}
+		else
+		{
+			tputs(tgetstr("up", NULL), 1, tputs_putchar);
+			tputs(tgetstr("cr", NULL), 1, tputs_putchar);
+		}
+		return (8);
+	}
+	if (buf[2] == 66)
+	{
+		if (ptr->next->index - ptr->index != 1)
+		{
+			rslt = ptr->next->index;
+			while (ptr->index != rslt)
+			{
+				tputs(tgetstr("up", NULL), 1, tputs_putchar);
+				ptr = ptr->prev;
+			}
+		}
+		else
+		{
+			tputs(tgetstr("do", NULL), 1, tputs_putchar);
+			tputs(tgetstr("cr", NULL), 1, tputs_putchar);
+		}
+		return (2);
+	}
+	if (buf[2] == 67)
+	{
+		//ft_putstr("Droite.");
+		return (6);
+	}
+	if (buf[2] == 68)
+	{
+		//ft_putstr("Gauche.");
+		return (4);
+	}
+	else
+		return (0);
+}
+
+int					is_bgreq(char *buf)
+{
+	if (buf[0] == 26)
+		return (1);
+	else
+		return (0);
+}
+
 t_elem				*ft_elem_init(char *data)
 {
 	t_elem			*new_elem;
@@ -124,6 +195,10 @@ void				ft_elem_del(t_elem *elem_to_del)
 	free(elem_to_del);
 }
 
+/*
+**	Initiliaze the list and return the nb_elem of the list.
+*/
+
 int					ft_initialize(int ac, char **av, t_list *init)
 {
 	t_elem			*ptr;
@@ -138,6 +213,7 @@ int					ft_initialize(int ac, char **av, t_list *init)
 		ptr = ft_elem_init(*av);
 		ft_elem_add(init->first_elem, ptr);
 		i++;
+		ptr->index = i;
 		*av++;
 	}
 	return (ac + 1);
@@ -149,15 +225,16 @@ int					main(int argc, char **argv)
 	struct termios	term;
 	char			read_char[4] = {0};
 	t_list			init;
+	t_elem			*ptr;
 	int				i;
-
 
 	argc--;
 	*argv++;
 	if (!(argc > 0))
 		return (-1);
 	init.nb_elem = ft_initialize(argc, argv, &init);
-	printf("Number of elem stocked on the list : %d.\n", init.nb_elem);
+	ptr = init.first_elem->prev;
+/*	printf("Number of elem stocked on the list : %d.\n", init.nb_elem);
 	while (init.nb_elem != 0)
 	{
 		printf("Debug\n");
@@ -172,18 +249,62 @@ int					main(int argc, char **argv)
 		init.nb_elem--;
 		printf("\n");
 	}
-	printf("No more elem.\n");
-//	if (tgetent(buffer, getenv("TERM")) < 1)
-//		return (-1);
-//	tcgetattr(0, &term);
-//	term.c_lflag &= ICANON; /* each char is treated independently */
-//	term.c_lflag &= ECHO; /* prevents a char from being output when pressed*/
-//	tcsetattr(0, 0, &term);
-//	tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
-//	while (*argv)
-//	{
-//		printf("%s\n", *argv);
-//		*argv++;
-//	}
+	printf("No more elem.\n");*/
+	if (tgetent(buffer, getenv("TERM")) < 1)
+		return (-1);
+	tcgetattr(0, &term);
+	term.c_lflag &= ~ICANON; /* each char is treated independently */
+	term.c_lflag &= ~ECHO; /* prevents a char from being output when pressed*/
+	tcsetattr(0, 0, &term);
+	//tputs(tgetstr("vi", NULL), 1, tputs_putchar);
+	tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
+	i = 0;
+	while (i < init.nb_elem)
+	{
+		printf("[%d] %s\n", i + 1, init.first_elem->data);
+		init.first_elem = init.first_elem->next;
+		i++;
+	}
+	tputs(tgetstr("up", NULL), 1, tputs_putchar); /* cursor up one line */
+	while (1)
+	{
+		read(0, read_char, 3);
+		if (is_bgreq(read_char))
+		{
+			printf("Todo : put in background");
+			/*
+			term.c_lflag |= ICANON;
+			term.c_lflag |= ECHO;
+			tcsetattr(0, 0, &term);
+			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+			*/
+		}
+		if (is_rtn(read_char))
+		{
+			term.c_lflag |= ICANON;
+			term.c_lflag |= ECHO;
+			tcsetattr(0, 0, &term); /* back to default values */
+			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+			tputs(tgetstr("ve", NULL), 1, tputs_putchar);
+			return (1);
+		}
+		if ((i = is_arrow(read_char, ptr)) != 0)
+		{ 
+			if (i == 8)
+			{
+				ptr = ptr->prev;
+			}
+			if (i == 2)
+			{
+				ptr = ptr->next;
+			}
+			tputs(tgetstr("us", NULL), 1, tputs_putchar);			
+			printf("[?] %s\n", ptr->data);
+			tputs(tgetstr("up", NULL), 1, tputs_putchar);
+			tputs(tgetstr("ue", NULL), 1, tputs_putchar);
+		}
+		else
+			printf("%d %d %d\n", read_char[0], read_char[1], read_char[2]);
+	}
 	return (0);
 }

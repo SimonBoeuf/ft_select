@@ -16,6 +16,7 @@ typedef struct		s_list
 typedef struct		s_elem
 {
 	char			*data;
+	unsigned int	index;
 	struct s_elem	*next;
 	struct s_elem	*prev;
 	int				cursor;
