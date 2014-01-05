@@ -3,7 +3,7 @@
 int					main(int argc, char **argv)
 {
 	char			*buffer;
-	struct termios	term;
+	struct termios	*term;
 	char			read_char[4] = {0};
 	t_list			*list;
 	int				i;
@@ -16,16 +16,16 @@ int					main(int argc, char **argv)
 	list = ft_initialize(--argc, ++argv);
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
-	init_term(term);
+	term = init_term();
 	printelems(list);
 	while (1)
 	{
 		read(0, read_char, 3);
 		if (is_rtn(read_char))
 		{
-			term.c_lflag |= ICANON;
-			term.c_lflag |= ECHO;
-			tcsetattr(0, 0, &term);
+			term->c_lflag |= ICANON;
+			term->c_lflag |= ECHO;
+			tcsetattr(0, 0, term);
 			tputs(tgetstr("te", NULL), 1, ft_putchar);
 			tputs(tgetstr("ve", NULL), 1, ft_putchar);
 			return (1);
@@ -46,18 +46,10 @@ int					main(int argc, char **argv)
 			tputs(tgetstr("ue", NULL), 1, ft_putchar);
 		}
 	}
-	term.c_lflag |= ICANON;
-	term.c_lflag |= ECHO;
-	tcsetattr(0, 0, &term);
+	term->c_lflag |= ICANON;
+	term->c_lflag |= ECHO;
+	tcsetattr(0, 0, term);
 	return (0);
-}
-
-void	init_term(struct termios term)
-{
-	tcgetattr(0, &term);
-	term.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(0, 0, &term);
-	tputs(tgetstr("ti", NULL), 1, ft_putchar);
 }
 
 void	printelems(t_list *list)

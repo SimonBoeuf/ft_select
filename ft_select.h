@@ -44,7 +44,12 @@ void		ft_error(int err);
 ** cursor_fct.c
 */
 t_cursor	*init_cursor(int x, int y);
-void		move_cursor(t_cursor *cursor);
+void		move_cursor(t_cursor *cursor, int x, int y);
+
+/*
+** misc.c
+*/
+struct termios *	init_term();
 
 /*
 ** list_fct.c
