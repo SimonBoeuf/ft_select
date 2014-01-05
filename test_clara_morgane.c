@@ -80,7 +80,7 @@ int					is_rtn(char *buf)
 
 int					is_arrow(char *buf, t_elem *ptr)
 {
-	int				rslt;
+	unsigned int				rslt;
 
 	printf("[?] %s\n", ptr->data);
 	tputs(tgetstr("up", NULL), 1, tputs_putchar);
@@ -206,7 +206,9 @@ int					ft_initialize(int ac, char **av, t_list *init)
 
 	init->first_elem = ft_elem_init(*av);
 	ac--;
-	*av++;
+	printf("premier ->%s\n", *av);
+	av++;
+	printf("deuxieme ->%s\n", *av);
 	i = 0;
 	while (i < ac)
 	{
@@ -214,7 +216,7 @@ int					ft_initialize(int ac, char **av, t_list *init)
 		ft_elem_add(init->first_elem, ptr);
 		i++;
 		ptr->index = i;
-		*av++;
+		av++;
 	}
 	return (ac + 1);
 }
@@ -223,26 +225,24 @@ int					main(int argc, char **argv)
 {
 	char			*buffer;
 	struct termios	term;
-	char			read_char[4] = {0};
+	//char			read_char[4] = {0};
 	t_list			init;
 	t_elem			*ptr;
 	int				i;
 
-	argc--;
-	*argv++;
-	if (!(argc > 0))
+	if (argc == 1)
 		return (-1);
-	init.nb_elem = ft_initialize(argc, argv, &init);
+
+	init.nb_elem = ft_initialize(--argc, ++argv, &init);
 	ptr = init.first_elem->prev;
 
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
 	tcgetattr(0, &term);
 	term.c_lflag &= ~(ICANON); //mode non canonique
-	term.c_lflag &= ~(ECHO); /* prevents a char from being output when pressed*/
+	term.c_lflag &= ~(ECHO); //mode echo off
 	tcsetattr(0, 0, &term);
-	//tputs(tgetstr("vi", NULL), 1, tputs_putchar);
-	tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
+	//tputs(tgetstr("do", NULL), 1, tputs_putchar); /* cursor down one line */
 	i = 0;
 	while (i < init.nb_elem)
 	{
@@ -250,26 +250,27 @@ int					main(int argc, char **argv)
 		init.first_elem = init.first_elem->next;
 		i++;
 	}
-	tputs(tgetstr("up", NULL), 1, tputs_putchar); /* cursor up one line */
-	while (1)
+	printf("fin affichage liste\n");
+	//tputs(tgetstr("up", NULL), 1, tputs_putchar); /* cursor up one line */
+	/*while (1)
 	{
 		read(0, read_char, 3);
 		if (is_bgreq(read_char))
 		{
-			printf("Todo : put in background");
+			printf("Todo : put in background");*/
 			/*
 			term.c_lflag |= ICANON;
 			term.c_lflag |= ECHO;
 			tcsetattr(0, 0, &term);
 			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
 			*/
-		}
+		/*}
 		if (is_rtn(read_char))
 		{
 			term.c_lflag |= ICANON;
 			term.c_lflag |= ECHO;
-			tcsetattr(0, 0, &term); /* back to default values */
-			tputs(tgetstr("ti", NULL), 1, tputs_putchar);
+			tcsetattr(0, 0, &term);*/ /* back to default values */
+			/*tputs(tgetstr("ti", NULL), 1, tputs_putchar);
 			tputs(tgetstr("ve", NULL), 1, tputs_putchar);
 			return (1);
 		}
@@ -287,9 +288,13 @@ int					main(int argc, char **argv)
 			printf("[?] %s\n", ptr->data);
 			tputs(tgetstr("up", NULL), 1, tputs_putchar);
 			tputs(tgetstr("ue", NULL), 1, tputs_putchar);
-		}
-		else
+		}*/
+		/*else
 			printf("%d %d %d\n", read_char[0], read_char[1], read_char[2]);
-	}
+		*/
+	//}
+	term.c_lflag |= ICANON;
+	term.c_lflag |= ECHO;
+	tcsetattr(0, 0, &term);
 	return (0);
 }
