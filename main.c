@@ -14,15 +14,9 @@ int					main(int argc, char **argv)
 
 	cursor = init_cursor(0,0);
 	list = ft_initialize(--argc, ++argv);
-	list->curr_elem = list->first_elem->prev;
-
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
-	tcgetattr(0, &term);
-	term.c_lflag &= ~(ICANON);
-	term.c_lflag &= ~(ECHO);
-	tcsetattr(0, 0, &term);
-	tputs(tgetstr("ti", NULL), 1, ft_putchar);
+	init_term(term);
 	printelems(list);
 	while (1)
 	{
@@ -56,6 +50,14 @@ int					main(int argc, char **argv)
 	term.c_lflag |= ECHO;
 	tcsetattr(0, 0, &term);
 	return (0);
+}
+
+void	init_term(struct termios term)
+{
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(0, 0, &term);
+	tputs(tgetstr("ti", NULL), 1, ft_putchar);
 }
 
 void	printelems(t_list *list)
