@@ -6,14 +6,14 @@
 #    By: lfouquet <lfouquet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/04 15:23:59 by lfouquet          #+#    #+#              #
-#    Updated: 2014/01/04 15:51:42 by lfouquet         ###   ########.fr        #
+#    Updated: 2014/01/05 16:39:53 by lfouquet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 NAME		= ft_select
 
-SRC			= 	test_clara_morgane.c
+SRC			= 	main.c
 
 OBJ			= $(SRC:.c=.o)
 
