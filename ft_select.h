@@ -49,7 +49,7 @@ void		move_cursor(t_cursor *cursor);
 /*
 ** list_fct.c
 */
-void			ft_initialize(int ac, char **av, t_list *init);
+t_list		*ft_initialize(int ac, char **av);
 t_elem		*ft_elem_init(char *data);
 void		ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 

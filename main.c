@@ -36,17 +36,29 @@ int					main(int argc, char **argv)
 			tputs(tgetstr("ve", NULL), 1, ft_putchar);
 			return (1);
 		}
-		if ((i = is_arrow(read_char)) != 0)
+		if ((i = is_arrow(read_char)))
 		{
-			if (i == 8)
+			if (i == KEYDOWN)
 			{
-				init->curr_elem = init->curr_elem->prev;
-
-			}
-			if (i == 2)
-			{
+				if (init->curr_elem->next == init->first_elem)
+					cursor->y = 0;
+				else
+					cursor->y++;
 				init->curr_elem = init->curr_elem->next;
 			}
+			if (i == KEYUP)
+			{
+				if (init->curr_elem == init->first_elem)
+				{
+					cursor->y = init->nb_elem;
+				}
+				else
+				{
+					cursor->y--;
+				}
+				init->curr_elem = init->curr_elem->prev;
+			}
+			move_cursor(cursor)
 			tputs(tgetstr("us", NULL), 1, ft_putchar);
 			ft_putendl(init->curr_elem->data);
 			tputs(tgetstr("ue", NULL), 1, ft_putchar);

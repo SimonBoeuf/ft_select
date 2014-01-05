@@ -55,22 +55,25 @@ void				ft_elem_del(t_elem *elem_to_del)
 **	Initiliaze the list and return the nb_elem of the list.
 */
 
-void				ft_initialize(int ac, char **av, t_list *init)
+t_list				*ft_initialize(int ac, char **av)
 {
+	t_list			*list;
 	t_elem			*ptr;
 	int				i;
 
-	init->first_elem = ft_elem_init(*av);
+	list = (t_list*)malloc(sizeof(t_list));
+	list->first_elem = ft_elem_init(*av);
 	ac--;
 	av++;
 	i = 0;
 	while (i < ac)
 	{
 		ptr = ft_elem_init(*av);
-		ft_elem_add(init->first_elem, ptr);
+		ft_elem_add(list->first_elem, ptr);
 		i++;
 		ptr->index = i;
 		av++;
 	}
-	init->nb_elem = ac;
+	list->nb_elem = ac;
+	return (list);
 }
