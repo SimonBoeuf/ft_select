@@ -44,6 +44,7 @@ void		ft_error(int err);
 ** cursor_fct.c
 */
 t_cursor	*init_cursor(int x, int y);
+void		move_cursor(t_cursor *cursor);
 
 /*
 ** list_fct.c
