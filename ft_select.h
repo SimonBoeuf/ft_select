@@ -31,14 +31,19 @@ typedef struct		s_elem
 
 typedef struct		s_cursor
 {
-	int				pos_x;
-	int				pos_y;
+	int				x;
+	int				y;
 }					t_cursor;
 
 /*
 ** error_fct.c
 */
 void		ft_error(int err);
+
+/*
+** cursor_fct.c
+*/
+t_cursor	*init_cursor(int x, int y);
 
 /*
 ** list_fct.c
@@ -61,6 +66,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			ft_putchar(int c);
 void		ft_putstr(char *str);
 void		printelems(t_list *list);
+void		ft_putendl(char *str);
 
 /*
 ** sighandler_fct.c
