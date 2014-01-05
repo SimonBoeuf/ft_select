@@ -8,8 +8,8 @@ CFLAGS		= -Wall -Werror -Wextra -ltermcap
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) -o $(NAME) $(SRC)
+$(NAME):
+			$(CC) $(CFLAGS) -o $(NAME) -I. $(SRC)
 
 clean:
 
