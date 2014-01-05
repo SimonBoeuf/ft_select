@@ -6,17 +6,15 @@ int					main(int argc, char **argv)
 	struct termios	term;
 	char			read_char[4] = {0};
 	t_list			*init;
-	t_elem			*ptr;
 	int				i;
-	t_cursor		cursor;
+	t_cursor		*cursor;
 
 	if (argc == 1)
 		return (-1);
 
-	cursor.pos_x = 0;
-	cursor.pos_y = 0;
+	cursor = init_cursor(0,0);
 	ft_initialize(--argc, ++argv, init);
-	ptr = init->first_elem->prev;
+	init->curr_elem = init->first_elem->prev;
 
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
@@ -42,15 +40,15 @@ int					main(int argc, char **argv)
 		{
 			if (i == 8)
 			{
-				ptr = ptr->prev;
+				init->curr_elem = init->curr_elem->prev;
 
 			}
 			if (i == 2)
 			{
-				ptr = ptr->next;
+				init->curr_elem = init->curr_elem->next;
 			}
 			tputs(tgetstr("us", NULL), 1, ft_putchar);
-			printf("[?] %s\n", ptr->data);
+			ft_putendl(init->curr_elem->data);
 			tputs(tgetstr("ue", NULL), 1, ft_putchar);
 		}
 	}
@@ -68,11 +66,7 @@ void	printelems(t_list *init)
 	i = 0;
 	while (i <= init->nb_elem)
 	{
-		ft_putchar('[');
-		ft_putchar('1' + i);
-		ft_putstr("] ");
-		ft_putstr(init->first_elem->data);
-		ft_putchar('\n');
+		ft_putendl(init->curr_elem->data);
 		init->curr_elem = init->curr_elem->next;
 		i++;
 	}
