@@ -1,4 +1,4 @@
-#include "ft_select.h"
+#include "./includes/ft_select.h"
 
 t_elem				*ft_elem_init(char *data)
 {
@@ -73,4 +73,18 @@ t_list				*ft_initialize(int ac, char **av)
 	list->curr_elem = list->first_elem->prev;
 	list->nb_elem = ac;
 	return (list);
+}
+
+void	ft_print_list(t_list *list)
+{
+	int	i;
+
+	list->curr_elem = list->first_elem;
+	i = 0;
+	while (i <= list->nb_elem)
+	{
+		ft_putendl(list->curr_elem->data);
+		list->curr_elem = list->curr_elem->next;
+		i++;
+	}
 }

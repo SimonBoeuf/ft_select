@@ -1,4 +1,4 @@
-#include "ft_select.h"
+#include "./includes/ft_select.h"
 
 int					main(int argc, char **argv)
 {
@@ -9,12 +9,12 @@ int					main(int argc, char **argv)
 
 	if (argc == 1)
 		return (-1);
-	cursor = init_cursor(0 , 0);
+	cursor = init_cursor(0, 0);
 	list = ft_initialize(--argc, ++argv);
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
 	term = init_term();
-	printelems(list);
+	ft_print_list(list);
 	readkeys(term, list);
 	closeterm(term);
 	return (0);

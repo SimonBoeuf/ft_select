@@ -1,4 +1,4 @@
-#include "ft_select.h"
+#include "./includes/ft_select.h"
 
 t_cursor	*init_cursor(int x, int y)
 {
@@ -11,12 +11,10 @@ t_cursor	*init_cursor(int x, int y)
 	return (c);
 }
 
-void	move_cursor(t_cursor *cursor, int x, int y)
+void	move_cursor(t_cursor *cursor)
 {
 	char	*res;
 
-	cursor->x = x;
-	cursor->y = y;
 	res = tgetstr("cm", NULL);
 	tputs(tgoto(res, cursor->x, cursor->y), 1, ft_putchar);
 	free(res);

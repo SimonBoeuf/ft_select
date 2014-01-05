@@ -1,4 +1,4 @@
-#include "ft_select.h"
+#include "./includes/ft_select.h"
 
 char				*ft_strcpy(char *s1, const char *s2)
 {
@@ -44,14 +44,7 @@ size_t				ft_strlen(const char *str)
 	return (i);
 }
 
-int					ft_strcmp(const char *s1, const char *s2)
+char	*ft_strnew(size_t size)
 {
-	while (*s1 == *s2)
-	{
-		if (*s1 == '\0')
-			return (0);
-		s1++;
-		s2++;
-	}
-	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
+	return ((char *)ft_memalloc(size + 1));
 }
