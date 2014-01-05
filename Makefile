@@ -2,7 +2,7 @@ CC			= gcc
 NAME		= ft_select
 
 SRC			= 	main.c list_fct.c put_fct.c str_fct.c sighandler_fct.c \
-				error_fct.c keyhandler_fct.c cursor_fct.c misc.c
+				keyhandler_fct.c cursor_fct.c misc.c
 
 CFLAGS		= -Wall -Werror -Wextra -ltermcap
 

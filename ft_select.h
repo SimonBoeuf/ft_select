@@ -50,6 +50,9 @@ void		move_cursor(t_cursor *cursor, int x, int y);
 ** misc.c
 */
 struct termios *	init_term();
+void				printelems(t_list *list);
+void				readkeys(struct termios *term, t_list *list);
+void				closeterm(struct termios *term);
 
 /*
 ** list_fct.c
@@ -71,8 +74,8 @@ int			ft_strcmp(const char *s1, const char *s2);
 */
 int			ft_putchar(int c);
 void		ft_putstr(char *str);
-void		printelems(t_list *list);
 void		ft_putendl(char *str);
+char		*ft_strnew(int size);
 
 /*
 ** sighandler_fct.c
