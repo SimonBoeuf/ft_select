@@ -1,13 +1,9 @@
 #include "./includes/ft_select.h"
 
-
-
-
-
-void				readkeys(struct termios *term, t_list *list)
+void				readkeys(struct termios *term, t_list *list, t_cursor *cur)
 {
 	char	*read_char;
-	int		i;
+	int		key;
 
 	read_char = ft_strnew(4);
 	while (1)
@@ -22,19 +18,10 @@ void				readkeys(struct termios *term, t_list *list)
 			tputs(tgetstr("ve", NULL), 1, ft_putchar);
 			//return (1);
 		}
-		if ((i = is_arrow(read_char)) != 0)
+		if ((key = is_arrow(read_char)) != 0)
 		{
-			if (i == KEYUP)
-				list->curr_elem = list->curr_elem->prev;
-			if (i == KEYDOWN)
-				list->curr_elem = list->curr_elem->next;
-			if (i == KEYLEFT)
-				list->curr_elem = list->curr_elem->prev;
-			if (i == KEYRIGHT)
-				list->curr_elem = list->curr_elem->next;
-			tputs(tgetstr("us", NULL), 1, ft_putchar);
-			ft_putendl(list->curr_elem->data);
-			tputs(tgetstr("ue", NULL), 1, ft_putchar);
+			launch_arrow(key, list, cur);
+
 		}
 	}
 }

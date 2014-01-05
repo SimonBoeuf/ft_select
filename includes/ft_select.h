@@ -86,9 +86,19 @@ void				ft_bzero(void *s, size_t n);
 void				*ft_memalloc(size_t size);
 
 /*
+** arrow_fct.c
+*/
+void				launch_arrow(int arrow, t_list *list, t_cursor *cursor);
+
+/*
+** effect_fct.c
+*/
+void				set_effect(t_elem *elem, int underline);
+
+/*
 ** misc.c
 */
-void				readkeys(struct termios *term, t_list *list);
+void				readkeys(struct termios *term, t_list *list, t_cursor *cur);
 
 /*
 ** sighandler_fct.c

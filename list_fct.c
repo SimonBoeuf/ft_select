@@ -80,9 +80,17 @@ void	ft_print_list(t_list *list)
 	int	i;
 
 	list->curr_elem = list->first_elem;
-	i = 0;
+	tputs(tgetstr("us", NULL), 1, ft_putchar);
+	ft_putendl(list->curr_elem->data);
+	tputs(tgetstr("ue", NULL), 1, ft_putchar);
+	list->curr_elem = list->curr_elem->next;
+	i = 1;
 	while (i <= list->nb_elem)
 	{
+		if (i == 0)
+		{
+
+		}
 		ft_putendl(list->curr_elem->data);
 		list->curr_elem = list->curr_elem->next;
 		i++;

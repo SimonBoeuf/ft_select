@@ -15,7 +15,8 @@ int					main(int argc, char **argv)
 		return (-1);
 	term = init_term();
 	ft_print_list(list);
-	readkeys(term, list);
+	move_cursor(cursor);
+	readkeys(term, list, cursor);
 	closeterm(term);
 	return (0);
 }

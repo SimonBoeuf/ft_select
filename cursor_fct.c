@@ -17,5 +17,4 @@ void	move_cursor(t_cursor *cursor)
 
 	res = tgetstr("cm", NULL);
 	tputs(tgoto(res, cursor->x, cursor->y), 1, ft_putchar);
-	free(res);
 }
