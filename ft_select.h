@@ -23,6 +23,12 @@ typedef struct		s_elem
 	int				selected;
 }					t_elem;
 
+typedef struct		s_cursor
+{
+	int				pos_x;
+	int				pos_y;
+}					t_cursor;
+
 void		ft_error(int err);
 char		*ft_strdup(const char *s1);
 t_elem		*ft_elem_init(char *data);
@@ -32,5 +38,6 @@ int			tputs_putchar(int c);
 void		ft_putstr(char *str);
 char		*ft_strcpy(char *s1, const char *s2);
 int			ft_strcmp(const char *s1, const char *s2);
+int					ft_initialize(int ac, char **av, t_list *init);
 
 #endif /* !FT_SELECT_H */
