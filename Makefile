@@ -1,18 +1,7 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lfouquet <lfouquet@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/01/04 15:23:59 by lfouquet          #+#    #+#              #
-#    Updated: 2014/01/05 17:00:22 by sboeuf           ###   ########.fr        #
-# **************************************************************************** #
-
 CC			= gcc
 NAME		= ft_select
 
-SRC			= 	main.c
+SRC			= 	main.c list_fct.c put_fct.c str_fct.c sighandler_fct.c
 
 CFLAGS		= -Wall -Werror -Wextra -ltermcap
 
