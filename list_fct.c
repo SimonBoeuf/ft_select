@@ -51,10 +51,6 @@ void				ft_elem_del(t_elem *elem_to_del)
 	free(elem_to_del);
 }
 
-/*
-**	Initiliaze the list and return the nb_elem of the list.
-*/
-
 t_list				*ft_initialize(int ac, char **av)
 {
 	t_list			*list;
@@ -74,6 +70,7 @@ t_list				*ft_initialize(int ac, char **av)
 		ptr->index = i;
 		av++;
 	}
+	list->curr_elem = list->first_elem->prev;
 	list->nb_elem = ac;
 	return (list);
 }
