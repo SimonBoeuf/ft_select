@@ -1,22 +1,21 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-
-
 # include <termios.h>
 # include <termcap.h>
 # include <unistd.h> /* write */
 # include <stdlib.h> /* getenv */
 # include <stdio.h>
 
-# define UP 1
-# define DOWN 2
-# define RIGHT 3
-# define LEFT 4
+# define KEYUP 1
+# define KEYDOWN 2
+# define KEYRIGHT 3
+# define KEYLEFT 4
 
 typedef struct		s_list
 {
 	struct s_elem	*first_elem;
+	struct s_elem	*curr_elem;
 	int				nb_elem;
 }					t_list;
 
@@ -44,7 +43,7 @@ void		ft_error(int err);
 /*
 ** list_fct.c
 */
-int			ft_initialize(int ac, char **av, t_list *init);
+void			ft_initialize(int ac, char **av, t_list *init);
 t_elem		*ft_elem_init(char *data);
 void		ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 
@@ -59,8 +58,9 @@ int			ft_strcmp(const char *s1, const char *s2);
 /*
 ** put_fct.c
 */
-int			tputs_putchar(int c);
+int			ft_putchar(int c);
 void		ft_putstr(char *str);
+void		printelems(t_list *list);
 
 /*
 ** sighandler_fct.c
