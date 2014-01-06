@@ -55,6 +55,32 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	move_cursor(cursor);
 }
 
+void	launch_rtn(t_list *list)
+{
+	int		i;
+	int		first_print;
+	t_elem	*ptr;
+
+	closeterm();
+	i = 0;
+	first_print = 0;
+	ptr = list->first_elem;
+	while (i < list->nb_elem)
+	{
+		if (ptr->selected == 1)
+		{
+			if (first_print == 1)
+				ft_putchar(' ');
+			ft_putstr(ptr->data);
+			first_print = 1;
+		}
+		ptr = ptr->next;
+		i++;
+	}
+	ft_putchar('\n');
+	exit(0);
+}
+
 void	launch_esc()
 {
 	closeterm();

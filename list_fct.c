@@ -71,11 +71,10 @@ t_list				*ft_initialize(int ac, char **av)
 	{
 		if (list->longest < ft_strlen(*av))
 			list->longest = ft_strlen(*av);
-		ptr = ft_elem_init(*av);
+		ptr = ft_elem_init(*(av++));
 		ft_elem_add(list->first_elem, ptr);
 		i++;
 		ptr->index = i;
-		av++;
 	}
 	list->curr_elem = list->first_elem->prev;
 	list->nb_elem = ac + 1;
@@ -90,28 +89,21 @@ void	ft_print_list(t_list *list, int tr, int tc)
 
 	cursor = init_cursor(0, 0);
 	list->curr_elem = list->first_elem;
-	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_putendl_fd(list->curr_elem->data, list->fd);
-	tputs(tgetstr("ue", NULL), 1, ft_putchar);
-	list->curr_elem = list->curr_elem->next;
 	i = 1;
 	wcol = list->longest + 4;
+	if (list->nb_elem * wcol > tc * tr)
+		printf("window too small");
 	while (i < list->nb_elem)
 	{
-		if (list->nb_elem * wcol > tc * tr)
-			printf("window too small");
-		else
+		if (cursor->y == tr)
 		{
-			if (cursor->y == tr)
-			{
-				cursor->y = 0;
-				cursor->x += wcol;
-			}
-			tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
-			ft_putstr_fd(list->curr_elem->data, list->fd);
-			list->curr_elem = list->curr_elem->next;
-			cursor->y++;
+			cursor->y = 0;
+			cursor->x += wcol;
 		}
+		tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
+		ft_putstr_fd(list->curr_elem->data, list->fd);
+		list->curr_elem = list->curr_elem->next;
+		cursor->y++;
 		i++;
 	}
 }

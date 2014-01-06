@@ -23,6 +23,8 @@ void	readkeys(t_list *list, t_cursor *cur)
 			launch_space(list, cur);
 		else if ((key = is_del(read_char)))
 			launch_del(list, cur);
+		else if ((key = is_rtn(read_char)))
+			launch_rtn(list);
 		ft_bzero(read_char, ft_strlen(read_char));
 	}
 }

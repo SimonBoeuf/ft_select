@@ -69,6 +69,7 @@ char				*ft_strnew(size_t size);
 */
 int					ft_putchar(int c);
 void				ft_putchar_fd(char c, int fd);
+void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char *str, int fd);
 
@@ -102,6 +103,7 @@ void				*ft_memalloc(size_t size);
 void				launch_arrow(int arrow, t_list *list, t_cursor *cursor);
 void				launch_space(t_list *list, t_cursor *cursor);
 void				launch_del(t_list *list, t_cursor *cursor);
+void				launch_rtn(t_list *list);
 void				launch_esc();
 
 /*
