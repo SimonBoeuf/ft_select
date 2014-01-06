@@ -9,11 +9,11 @@ int					main(int argc, char **argv)
 
 	if (argc == 1)
 		return (-1);
-	cursor = init_cursor(0, 0);
 	list = ft_initialize(--argc, ++argv);
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
 	term = init_term(list->fd);
+	cursor = init_cursor(0, 0);
 	ft_print_list(list);
 	move_cursor(cursor);
 	readkeys(term, list, cursor);

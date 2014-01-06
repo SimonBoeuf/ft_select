@@ -35,6 +35,7 @@ typedef struct		s_cursor
 {
 	int				x;
 	int				y;
+	char			*res;
 }					t_cursor;
 
 /*

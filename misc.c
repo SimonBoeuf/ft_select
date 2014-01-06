@@ -13,15 +13,14 @@ void				readkeys(struct termios *term, t_list *list, t_cursor *cur)
 		{
 			term->c_lflag |= ICANON;
 			term->c_lflag |= ECHO;
-			tcsetattr(0, 0, term);
+			tcsetattr(list->fd, 0, term);
 			tputs(tgetstr("te", NULL), 1, ft_putchar);
 			tputs(tgetstr("ve", NULL), 1, ft_putchar);
-			//return (1);
+			exit(1);
 		}
 		if ((key = is_arrow(read_char)) != 0)
 		{
 			launch_arrow(key, list, cur);
-
 		}
 	}
 }

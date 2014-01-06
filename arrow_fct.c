@@ -6,25 +6,28 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 	{
 		set_effect(list->curr_elem, 0, list->fd);
 		//move_cursor(cursor);
-		if (list->curr_elem->next == list->first_elem)
+		//if (list->curr_elem->next == list->first_elem)
+		if (cursor->y == list->nb_elem - 1)
 			cursor->y = 0;
 		else
 			cursor->y++;
+		//move_cursor(cursor);
 		list->curr_elem = list->curr_elem->next;
 	}
-	if (arrow == KEYUP)
+	else if (arrow == KEYUP)
 	{
 		set_effect(list->curr_elem, 0, list->fd);
 		//move_cursor(cursor);
-		if (list->curr_elem == list->first_elem)
-		{
-			cursor->y = list->nb_elem;
-		}
+		//if (list->curr_elem == list->first_elem)
+		if (cursor->y == 0)
+			cursor->y = list->nb_elem - 1;
 		else
 			cursor->y--;
-		//set_effect(list->curr_elem, 1);
+		//move_cursor(cursor);
 		list->curr_elem = list->curr_elem->prev;
 	}
+
+	//set_effect(list->curr_elem, 1, list->fd);
 	move_cursor(cursor);
 
 

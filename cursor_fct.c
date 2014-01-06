@@ -7,14 +7,11 @@ t_cursor	*init_cursor(int x, int y)
 	c = (t_cursor*)malloc(sizeof(t_cursor));
 	c->x = x;
 	c->y = y;
-
+	c->res = tgetstr("cm", NULL);
 	return (c);
 }
 
 void	move_cursor(t_cursor *cursor)
 {
-	char	*res;
-
-	res = tgetstr("cm", NULL);
-	tputs(tgoto(res, cursor->x, cursor->y), 1, ft_putchar);
+	tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
 }

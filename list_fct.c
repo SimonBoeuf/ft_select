@@ -74,7 +74,7 @@ t_list				*ft_initialize(int ac, char **av)
 		av++;
 	}
 	list->curr_elem = list->first_elem->prev;
-	list->nb_elem = ac;
+	list->nb_elem = ac + 1;
 	return (list);
 }
 
@@ -88,7 +88,7 @@ void	ft_print_list(t_list *list)
 	tputs(tgetstr("ue", NULL), 1, ft_putchar);
 	list->curr_elem = list->curr_elem->next;
 	i = 1;
-	while (i <= list->nb_elem)
+	while (i < list->nb_elem)
 	{
 		if (i == 0)
 		{
