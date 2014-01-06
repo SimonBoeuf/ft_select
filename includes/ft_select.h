@@ -37,6 +37,7 @@ typedef struct		s_cursor
 	int				y;
 }					t_cursor;
 
+extern int	keep_reading;
 /*
 ** cursor_fct.c
 */
@@ -79,7 +80,7 @@ int					is_bgreq(char *buf);
 ** term_fct.c
 */
 struct termios *	init_term(int fd);
-void				closeterm(struct termios *term);
+void				closeterm();
 
 /*
 ** divers_fct.c
@@ -106,5 +107,7 @@ void				readkeys(struct termios *term, t_list *list, t_cursor *cur);
 /*
 ** sighandler_fct.c
 */
+void catch_cont(int sig);
+void catch_int(int sig);
 
 #endif /* !FT_SELECT_H */
