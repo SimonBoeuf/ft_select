@@ -1,5 +1,4 @@
 #include "./includes/ft_select.h"
-#include <fcntl.h>
 
 int		ft_putchar(int c)
 {

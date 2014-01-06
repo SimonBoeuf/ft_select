@@ -1,9 +1,9 @@
 #include "./includes/ft_select.h"
 
-void				ft_error(int err)
+void				ft_error(int err, int fd)
 {
 	if (err == 1)
-		ft_putstr("Error : Insuffisant memory.\n");
+		ft_putstr_fd("Error : Insuffisant memory.\n", fd);
 	exit(0);
 }
 

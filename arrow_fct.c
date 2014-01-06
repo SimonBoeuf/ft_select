@@ -4,7 +4,7 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 {
 	if (arrow == KEYDOWN)
 	{
-		set_effect(list->curr_elem, 0);
+		set_effect(list->curr_elem, 0, list->fd);
 		//move_cursor(cursor);
 		if (list->curr_elem->next == list->first_elem)
 			cursor->y = 0;
@@ -14,7 +14,7 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 	}
 	if (arrow == KEYUP)
 	{
-		set_effect(list->curr_elem, 0);
+		set_effect(list->curr_elem, 0, list->fd);
 		//move_cursor(cursor);
 		if (list->curr_elem == list->first_elem)
 		{

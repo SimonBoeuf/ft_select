@@ -1,12 +1,9 @@
 #include "./includes/ft_select.h"
 
-struct termios	*init_term()
+struct termios	*init_term(int	fd)
 {
 	struct termios *term;
-	char			*name;
 
-	name = ttyname(0);
-	fd = open(name, O_WRONLY);
 	term = (struct termios*)malloc(sizeof(struct termios));
 	tcgetattr(fd, term);
 	term->c_lflag &= ~(ICANON | ECHO);

@@ -13,7 +13,7 @@ int					main(int argc, char **argv)
 	list = ft_initialize(--argc, ++argv);
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
-	term = init_term();
+	term = init_term(list->fd);
 	ft_print_list(list);
 	move_cursor(cursor);
 	readkeys(term, list, cursor);

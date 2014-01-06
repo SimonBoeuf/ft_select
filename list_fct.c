@@ -5,9 +5,9 @@ t_elem				*ft_elem_init(char *data)
 	t_elem			*new_elem;
 
 	if (!(new_elem = (t_elem*)malloc(sizeof(t_elem))))
-		ft_error(1);
+		ft_error(1, 2);
 	if (!(new_elem->data = ft_strdup(data)))
-		ft_error(1);
+		ft_error(1, 2);
 	new_elem->prev = NULL;
 	new_elem->next = NULL;
 	new_elem->cursor = 0;
@@ -56,8 +56,11 @@ t_list				*ft_initialize(int ac, char **av)
 	t_list			*list;
 	t_elem			*ptr;
 	int				i;
+	char			*name;
 
 	list = (t_list*)malloc(sizeof(t_list));
+	name = ttyname(0);
+	list->fd = open(name, O_WRONLY);
 	list->first_elem = ft_elem_init(*av);
 	ac--;
 	av++;
@@ -81,7 +84,7 @@ void	ft_print_list(t_list *list)
 
 	list->curr_elem = list->first_elem;
 	tputs(tgetstr("us", NULL), 1, ft_putchar);
-	ft_putendl(list->curr_elem->data);
+	ft_putendl_fd(list->curr_elem->data, list->fd);
 	tputs(tgetstr("ue", NULL), 1, ft_putchar);
 	list->curr_elem = list->curr_elem->next;
 	i = 1;
@@ -91,7 +94,7 @@ void	ft_print_list(t_list *list)
 		{
 
 		}
-		ft_putendl(list->curr_elem->data);
+		ft_putendl_fd(list->curr_elem->data, list->fd);
 		list->curr_elem = list->curr_elem->next;
 		i++;
 	}

@@ -6,6 +6,7 @@
 # include <unistd.h> /* write */
 # include <stdlib.h> /* getenv */
 # include <stdio.h>
+#include <fcntl.h>
 
 # define KEYUP 1
 # define KEYDOWN 2
@@ -17,6 +18,7 @@ typedef struct		s_list
 	struct s_elem	*first_elem;
 	struct s_elem	*curr_elem;
 	int				nb_elem;
+	int				fd;
 }					t_list;
 
 typedef struct		s_elem
@@ -62,8 +64,9 @@ char				*ft_strnew(size_t size);
 ** put_fct.c
 */
 int					ft_putchar(int c);
-void				ft_putstr(char *str);
-void				ft_putendl(char *str);
+void				ft_putchar_fd(char c, int fd);
+void				ft_putstr_fd(char const *s, int fd);
+void				ft_putendl_fd(char *str, int fd);
 
 /*
 ** keyhandler_fct.c
@@ -75,13 +78,13 @@ int					is_bgreq(char *buf);
 /*
 ** term_fct.c
 */
-struct termios *	init_term();
+struct termios *	init_term(int fd);
 void				closeterm(struct termios *term);
 
 /*
 ** divers_fct.c
 */
-void				ft_error(int err);
+void				ft_error(int err, int fd);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memalloc(size_t size);
 
@@ -93,7 +96,7 @@ void				launch_arrow(int arrow, t_list *list, t_cursor *cursor);
 /*
 ** effect_fct.c
 */
-void				set_effect(t_elem *elem, int underline);
+void				set_effect(t_elem *elem, int underline, int fd);
 
 /*
 ** misc.c
