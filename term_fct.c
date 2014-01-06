@@ -1,6 +1,6 @@
 #include "./includes/ft_select.h"
 
-void			*init_sequence(t_list *list)
+void			init_sequence(t_list *list)
 {
 	int			i;
 	t_elem		*ptr;
@@ -32,7 +32,7 @@ struct termios	*init_term(int	fd)
 	return (term);
 }
 
-void	closeterm()
+void	closeterm(void)
 {
 	struct termios	*term;
 
