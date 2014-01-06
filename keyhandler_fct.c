@@ -16,3 +16,13 @@ int		is_esc(char *buf)
 {
 	return (buf[0] == 27 && buf[1] == 0 && buf[2] == 0);
 }
+
+int		is_space(char *buf)
+{
+	return (buf[0] == 32);
+}
+
+int		is_del(char *buf)
+{
+	return (buf[0] == 27 && buf[1] == 91 && buf[2] == 51);
+}

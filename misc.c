@@ -14,12 +14,15 @@ void	readkeys(t_list *list, t_cursor *cur)
 	{
 		//printf("%d\t%d\t%d\n", read_char[0],read_char[1],read_char[2]);
 		if (is_esc(read_char))
-		{
-			closeterm();
-			exit(0);
-		}
-		if ((key = is_arrow(read_char)) != 0)
+			launch_esc();
+		if ((key = is_arrow(read_char)))
 			launch_arrow(key, list, cur);
+		else if ((key = is_arrow(read_char)))
+			launch_arrow(key, list, cur);
+		else if ((key = is_space(read_char)))
+			launch_space(list, cur);
+		else if ((key = is_del(read_char)))
+			launch_del(list, cur);
 		ft_bzero(read_char, ft_strlen(read_char));
 	}
 }
