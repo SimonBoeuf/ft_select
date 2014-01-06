@@ -24,5 +24,6 @@ int		is_space(char *buf)
 
 int		is_del(char *buf)
 {
-	return (buf[0] == 27 && buf[1] == 91 && buf[2] == 51);
+	return ((buf[0] == 27 && buf[1] == 91 && buf[2] == 51) ||
+			(buf[0] == 127 && buf[1] == 0 && buf[2] == 0));
 }
