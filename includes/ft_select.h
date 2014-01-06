@@ -75,6 +75,7 @@ void				ft_putendl_fd(char *str, int fd);
 */
 int					is_rtn(char *buf);
 int        			is_arrow(char *buf);
+int					is_esc(char *buf);
 int					is_bgreq(char *buf);
 int					is_space(char *buf);
 int					is_del(char *buf);
@@ -99,6 +100,7 @@ void				*ft_memalloc(size_t size);
 void				launch_arrow(int arrow, t_list *list, t_cursor *cursor);
 void				launch_space(t_list *list, t_cursor *cursor);
 void				launch_del(t_list *list, t_cursor *cursor);
+void				launch_esc();
 
 /*
 ** effect_fct.c
@@ -113,7 +115,7 @@ void				readkeys(t_list *list, t_cursor *cur);
 /*
 ** sighandler_fct.c
 */
-void catch_cont(int sig);
-void catch_int(int sig);
+void				catch_cont(int sig);
+void				catch_int(int sig);
 
 #endif /* !FT_SELECT_H */

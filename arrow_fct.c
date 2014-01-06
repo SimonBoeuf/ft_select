@@ -54,3 +54,9 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	//cursor->y = tmp_cur.y;
 	move_cursor(cursor);
 }
+
+void	launch_esc()
+{
+	closeterm();
+	exit(0);
+}

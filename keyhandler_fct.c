@@ -7,17 +7,14 @@ int		is_rtn(char *buf)
 
 int		is_arrow(char *buf)
 {
-        if (buf[0] != 27 || buf[1] != 91 || buf[2] < 65 || buf[2] > 68)
-                return (0);
-        return (buf[2] - 64);
+	if (buf[0] != 27 || buf[1] != 91 || buf[2] < 65 || buf[2] > 68)
+		return (0);
+	return (buf[2] - 64);
 }
 
-int		is_bgreq(char *buf)
+int		is_esc(char *buf)
 {
-	if (buf[0] == 26)
-		return (1);
-	else
-		return (0);
+	return (buf[0] == 27 && buf[1] == 0 && buf[2] == 0);
 }
 
 int		is_space(char *buf)
