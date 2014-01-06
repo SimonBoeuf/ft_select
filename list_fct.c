@@ -36,7 +36,7 @@ void				ft_elem_add(t_elem *first_elem, t_elem *elem_to_add)
 	}
 }
 
-void				ft_elem_del(t_elem *elem_to_del)
+t_elem				*ft_elem_del(t_elem *elem_to_del)
 {
 	t_elem			*ptr_prev;
 	t_elem			*ptr_next;
@@ -49,6 +49,7 @@ void				ft_elem_del(t_elem *elem_to_del)
 		ptr_next->prev = ptr_prev;
 	}
 	free(elem_to_del);
+	return (ptr_next);
 }
 
 t_list				*ft_initialize(int ac, char **av)
