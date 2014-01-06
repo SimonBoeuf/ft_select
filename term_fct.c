@@ -1,5 +1,23 @@
 #include "./includes/ft_select.h"
 
+void			*init_sequence(t_list *list)
+{
+	int			i;
+	t_elem		*ptr;
+
+	i = 0;
+	ptr = list->first_elem;
+	while (i < list->nb_elem)
+	{
+		if (ptr != list->curr_elem)
+			set_effect(ptr, 0, list->fd);
+		else
+			set_effect(ptr, 1, list->fd);
+		i++;
+		ptr = ptr->next;
+	}
+}
+
 struct termios	*init_term(int	fd)
 {
 	struct termios *term;
