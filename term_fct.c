@@ -29,6 +29,7 @@ struct termios	*init_term(int	fd)
     term->c_cc[VTIME] = 0;
 	tcsetattr(fd, 0, term);
 	tputs(tgetstr("ti", NULL), 1, ft_putchar);
+	tputs(tgetstr("vi", NULL), 1, ft_putchar);
 	return (term);
 }
 

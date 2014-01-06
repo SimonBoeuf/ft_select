@@ -37,21 +37,21 @@ void	launch_space(t_list *list, t_cursor *cursor)
 
 void	launch_del(t_list *list, t_cursor *cursor)
 {
-	//t_cursor	tmp_cur;
+
 	char		*clear_screen;
 
 	clear_screen = tgetstr("cl", NULL);
 	tputs(clear_screen, 1, ft_putchar);
-	/*tmp_cur.x = cursor->x;
-	tmp_cur.y = cursor->y;
-	cursor->x = 0;
-	cursor->y = 0;*/
+	if (list->curr_elem == list->first_elem)
+		list->first_elem = list->first_elem->next;
+	else if (list->curr_elem == list->first_elem->prev)
+	{
+		cursor->x = 0;
+		cursor->y = 0;
+	}
 	list->curr_elem = ft_elem_del(list->curr_elem);
 	list->nb_elem--;
-	//move_cursor(cursor); // to 0,0
 	init_sequence(list);
-	//cursor->x = tmp_cur.x;
-	//cursor->y = tmp_cur.y;
 	move_cursor(cursor);
 }
 
