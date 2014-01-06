@@ -103,7 +103,7 @@ void				set_effect(t_elem *elem, int underline, int fd);
 /*
 ** misc.c
 */
-void				readkeys(struct termios *term, t_list *list, t_cursor *cur);
+void				readkeys(t_list *list, t_cursor *cur);
 
 /*
 ** sighandler_fct.c

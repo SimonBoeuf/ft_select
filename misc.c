@@ -1,7 +1,7 @@
 #include "./includes/ft_select.h"
 int		keep_reading;
 
-void	readkeys(struct termios *term, t_list *list, t_cursor *cur)
+void	readkeys(t_list *list, t_cursor *cur)
 {
 	char	*read_char;
 	int		key;
