@@ -2,6 +2,8 @@
 
 void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 {
+
+
 	if (arrow == KEYDOWN)
 	{
 		set_effect(list->curr_elem, 0, list->fd);

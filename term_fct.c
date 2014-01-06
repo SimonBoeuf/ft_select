@@ -7,6 +7,8 @@ struct termios	*init_term(int	fd)
 	term = (struct termios*)malloc(sizeof(struct termios));
 	tcgetattr(fd, term);
 	term->c_lflag &= ~(ICANON | ECHO);
+	term->c_cc[VMIN] = 1;
+    term->c_cc[VTIME] = 0;
 	tcsetattr(fd, 0, term);
 	tputs(tgetstr("ti", NULL), 1, ft_putchar);
 	return (term);

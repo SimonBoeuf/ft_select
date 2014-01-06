@@ -62,6 +62,7 @@ t_list				*ft_initialize(int ac, char **av)
 	name = ttyname(0);
 	list->fd = open(name, O_WRONLY);
 	list->first_elem = ft_elem_init(*av);
+	list->first_elem->index = 1;
 	ac--;
 	av++;
 	i = 0;
@@ -70,7 +71,7 @@ t_list				*ft_initialize(int ac, char **av)
 		ptr = ft_elem_init(*av);
 		ft_elem_add(list->first_elem, ptr);
 		i++;
-		ptr->index = i;
+		ptr->index = i + 1;
 		av++;
 	}
 	list->curr_elem = list->first_elem->prev;

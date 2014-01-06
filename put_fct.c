@@ -6,6 +6,7 @@ int		ft_putchar(int c)
 
 	fd = open("/dev/tty", O_WRONLY);
 	write(fd, &c, 1);
+	close(fd);
 	return (1);
 }
 
