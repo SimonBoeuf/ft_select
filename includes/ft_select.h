@@ -6,7 +6,8 @@
 # include <unistd.h> /* write */
 # include <stdlib.h> /* getenv */
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include <sys/ioctl.h>
 
 # define KEYUP 1
 # define KEYDOWN 2
@@ -18,6 +19,7 @@ typedef struct		s_list
 	struct s_elem	*first_elem;
 	struct s_elem	*curr_elem;
 	int				nb_elem;
+	unsigned int	longest;
 	int				fd;
 }					t_list;
 
@@ -52,7 +54,7 @@ t_list				*ft_initialize(int ac, char **av);
 t_elem				*ft_elem_init(char *data);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_elem *elem_to_del);
-void				ft_print_list(t_list *list);
+void				ft_print_list(t_list *list, int tr, int tc);
 
 /*
 ** str_fct.c
