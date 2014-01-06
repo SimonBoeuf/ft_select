@@ -22,7 +22,7 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 		}
 		else
 			cursor->y--;
-		set_effect(list->curr_elem, 1);
+		//set_effect(list->curr_elem, 1);
 		list->curr_elem = list->curr_elem->prev;
 	}
 	move_cursor(cursor);
