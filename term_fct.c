@@ -17,7 +17,7 @@ void	closeterm()
 	struct termios	*term;
 
 	term = (struct termios*)malloc(sizeof(struct termios));
-	tcgetattr(fd, term);
+	tcgetattr(0, term);
 	term->c_lflag |= (ICANON | ECHO);
 	tcsetattr(0, 0, term);
 	tputs(tgetstr("te", NULL), 1, ft_putchar);
