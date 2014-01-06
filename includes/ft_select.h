@@ -75,7 +75,7 @@ void				ft_putendl_fd(char *str, int fd);
 */
 int					is_rtn(char *buf);
 int        			is_arrow(char *buf);
-int					is_bgreq(char *buf);
+int					is_esc(char *buf);
 
 /*
 ** term_fct.c
@@ -108,7 +108,7 @@ void				readkeys(t_list *list, t_cursor *cur);
 /*
 ** sighandler_fct.c
 */
-void catch_cont(int sig);
-void catch_int(int sig);
+void				catch_cont(int sig);
+void				catch_int(int sig);
 
 #endif /* !FT_SELECT_H */

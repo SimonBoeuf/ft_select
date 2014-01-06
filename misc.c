@@ -10,17 +10,16 @@ void	readkeys(t_list *list, t_cursor *cur)
 	signal(SIGINT, catch_int);
 	read_char = ft_strnew(4);
 	keep_reading = 1;
-	while (keep_reading)
+	while (read(0, read_char, 3))
 	{
-		read(0, read_char, 3);
-		if (is_rtn(read_char))
+		//printf("%d\t%d\t%d\n", read_char[0],read_char[1],read_char[2]);
+		if (is_esc(read_char))
 		{
 			closeterm();
-			exit(1);
+			exit(0);
 		}
 		if ((key = is_arrow(read_char)) != 0)
-		{
 			launch_arrow(key, list, cur);
-		}
+		ft_bzero(read_char, ft_strlen(read_char));
 	}
 }
