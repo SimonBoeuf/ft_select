@@ -8,8 +8,8 @@ t_elem				*ft_elem_init(char *data)
 		ft_error(1, 2);
 	if (!(new_elem->data = ft_strdup(data)))
 		ft_error(1, 2);
-	new_elem->prev = NULL;
-	new_elem->next = NULL;
+	new_elem->prev = new_elem;
+	new_elem->next = new_elem;
 	new_elem->cursor = 0;
 	new_elem->selected = 0;
 	return (new_elem);
