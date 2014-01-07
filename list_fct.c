@@ -1,6 +1,6 @@
 #include "./includes/ft_select.h"
 
-t_elem				*ft_elem_init(char *data, int index)
+t_elem				*ft_elem_init(char *data)
 {
 	t_elem			*new_elem;
 
@@ -12,7 +12,6 @@ t_elem				*ft_elem_init(char *data, int index)
 	new_elem->next = new_elem;
 	new_elem->cursor = 0;
 	new_elem->selected = 0;
-	new_elem->index = index;
 	return (new_elem);
 }
 
@@ -63,7 +62,7 @@ t_list				*ft_getlist(int ac, char **av)
 	{
 		list = (t_list*)malloc(sizeof(t_list));
 		list->fd = open(ttyname(0), O_WRONLY);
-		list->first_elem = ft_elem_init(*av, 0);
+		list->first_elem = ft_elem_init(*av);
 		list->longest = 0;
 		av++;
 		i = 1;
@@ -71,7 +70,7 @@ t_list				*ft_getlist(int ac, char **av)
 		{
 			if (list->longest < ft_strlen(*av))
 				list->longest = ft_strlen(*av);
-			ptr = ft_elem_init(*(av++), i);
+			ptr = ft_elem_init(*(av++));
 			ft_elem_add(list->first_elem, ptr);
 			i++;
 		}

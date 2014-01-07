@@ -26,7 +26,6 @@ typedef struct		s_list
 typedef struct		s_elem
 {
 	char			*data;
-	unsigned int	index;
 	struct s_elem	*next;
 	struct s_elem	*prev;
 	int				cursor;
@@ -51,7 +50,7 @@ void				move_cursor(t_cursor *cursor);
 ** list_fct.c
 */
 t_list				*ft_getlist(int ac, char **av);
-t_elem				*ft_elem_init(char *data, int index);
+t_elem				*ft_elem_init(char *data);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_elem *elem_to_del);
 void				ft_print_list(t_list *list, int tr, int tc);
