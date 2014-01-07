@@ -129,8 +129,10 @@ int					is_win_to_small(t_list *list);
 /*
 ** sighandler_fct.c
 */
-void				catch_cont(int sig);
-void				catch_int(int sig);
-void				catch_resize(int s);
+void				catch(int s);
+void				catch_controle(void);
+void				catch_cont(void);
+void				catch_int(void);
+void				catch_resize(void);
 
 #endif /* !FT_SELECT_H */

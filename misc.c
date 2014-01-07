@@ -1,15 +1,33 @@
 #include "./includes/ft_select.h"
 int		keep_reading;
 
+void	catch(int s)
+{
+	if (s == SIGTSTP)
+		catch_controle();
+	if (s == SIGCONT)
+		catch_cont();
+	if (s == SIGINT)
+		catch_int();
+	if (s == SIGWINCH)
+		catch_resize();
+}
+
+void	ft_check_signal()
+{
+	signal(SIGTSTP, catch);
+	signal(SIGCONT, catch);
+	signal(SIGINT, catch);
+	signal(SIGWINCH, catch);
+}
+
 void	readkeys(t_list *list, t_cursor *cur)
 {
 	char	*read_char;
 	int		key;
 	int		to_small;
 
-	signal(SIGCONT, catch_cont);
-	signal(SIGINT, catch_int);
-	signal(SIGWINCH, catch_resize);
+	ft_check_signal();
 	read_char = ft_strnew(4);
 	keep_reading = 1;
 	while (read(0, read_char, 3))

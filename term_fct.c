@@ -14,13 +14,20 @@ void				init_sequence(void)
 	t_cursor			*cursor;
 	struct winsize		w;
 	struct termios		*term;
+	t_elem				*tmp;
 
 	list = ft_getlist(0, NULL);
+	tmp = list->curr_elem;
+
 	term = init_term(list->fd);
-	cursor = init_cursor(list->curr_elem->posx, list->curr_elem->posy);
+	//printf("                     valeur data init->%s, cursor->%d\n", list->curr_elem->data, list->curr_elem->cursor);
+
 	w = ft_get_winsize();
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
+	list->curr_elem = tmp;
+	cursor = init_cursor(list->curr_elem->posx, list->curr_elem->posy);
 	move_cursor(cursor);
+
 }
 
 struct termios		*init_term(int fd)
