@@ -124,6 +124,7 @@ void				set_effect(t_elem *elem, int fd);
 ** misc.c
 */
 void				readkeys(t_list *list, t_cursor *cur);
+int					is_win_to_small(t_list *list);
 
 /*
 ** sighandler_fct.c
