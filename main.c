@@ -10,7 +10,7 @@ int					main(int argc, char **argv)
 
 	if (argc == 1)
 		return (-1);
-	list = ft_initialize(--argc, ++argv);
+	list = ft_getlist(--argc, ++argv);
 	if (tgetent(buffer, getenv("TERM")) < 1)
 		return (-1);
 	ioctl(0, TIOCGWINSZ, &w);

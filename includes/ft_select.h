@@ -50,8 +50,8 @@ void				move_cursor(t_cursor *cursor);
 /*
 ** list_fct.c
 */
-t_list				*ft_initialize(int ac, char **av);
-t_elem				*ft_elem_init(char *data);
+t_list				*ft_getlist(int ac, char **av);
+t_elem				*ft_elem_init(char *data, int index);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_elem *elem_to_del);
 void				ft_print_list(t_list *list, int tr, int tc);

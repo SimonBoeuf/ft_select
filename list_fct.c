@@ -1,6 +1,6 @@
 #include "./includes/ft_select.h"
 
-t_elem				*ft_elem_init(char *data)
+t_elem				*ft_elem_init(char *data, int index)
 {
 	t_elem			*new_elem;
 
@@ -12,6 +12,7 @@ t_elem				*ft_elem_init(char *data)
 	new_elem->next = new_elem;
 	new_elem->cursor = 0;
 	new_elem->selected = 0;
+	new_elem->index = index;
 	return (new_elem);
 }
 
@@ -52,32 +53,31 @@ t_elem				*ft_elem_del(t_elem *elem_to_del)
 	return (ptr_next);
 }
 
-t_list				*ft_initialize(int ac, char **av)
+t_list				*ft_getlist(int ac, char **av)
 {
-	t_list			*list;
+	static t_list	*list = NULL;
 	t_elem			*ptr;
 	int				i;
-	char			*name;
 
-	list = (t_list*)malloc(sizeof(t_list));
-	name = ttyname(0);
-	list->fd = open(name, O_WRONLY);
-	list->first_elem = ft_elem_init(*av);
-	list->first_elem->index = 1;
-	list->longest = 0;
-	av++;
-	i = 1;
-	while (i < ac)
+	if (list == NULL)
 	{
-		if (list->longest < ft_strlen(*av))
-			list->longest = ft_strlen(*av);
-		ptr = ft_elem_init(*(av++));
-		ft_elem_add(list->first_elem, ptr);
-		i++;
-		ptr->index = i;
+		list = (t_list*)malloc(sizeof(t_list));
+		list->fd = open(ttyname(0), O_WRONLY);
+		list->first_elem = ft_elem_init(*av, 0);
+		list->longest = 0;
+		av++;
+		i = 1;
+		while (i < ac)
+		{
+			if (list->longest < ft_strlen(*av))
+				list->longest = ft_strlen(*av);
+			ptr = ft_elem_init(*(av++), i);
+			ft_elem_add(list->first_elem, ptr);
+			i++;
+		}
+		list->curr_elem = list->first_elem->prev;
+		list->nb_elem = ac + 1;
 	}
-	list->curr_elem = list->first_elem->prev;
-	list->nb_elem = ac + 1;
 	return (list);
 }
 
