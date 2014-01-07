@@ -30,6 +30,8 @@ typedef struct		s_elem
 	struct s_elem	*prev;
 	int				cursor;
 	int				selected;
+	int				posx;
+	int				posy;
 }					t_elem;
 
 typedef struct		s_cursor

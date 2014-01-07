@@ -75,7 +75,7 @@ t_list				*ft_getlist(int ac, char **av)
 			i++;
 		}
 		list->curr_elem = list->first_elem->prev;
-		list->nb_elem = ac + 1;
+		list->nb_elem = ac;
 	}
 	return (list);
 }
@@ -87,23 +87,24 @@ void	ft_print_list(t_list *list, int tr, int tc)
 
 	cursor = init_cursor(0, 0);
 	list->curr_elem = list->first_elem;
-	i = 1;
+	i = 0;
 	if (list->nb_elem * (int)(list->longest + 4) > tc * tr)
 		ft_putstr_fd("window too small", list->fd);
 	else
 	{
-		while (i < list->nb_elem)
+		while (i++ < list->nb_elem)
 		{
 			if (cursor->y == tr)
 			{
 				cursor->y = 0;
 				cursor->x += list->longest + 4;
 			}
+			list->curr_elem->posx = cursor->x;
+			list->curr_elem->posy = cursor->y;
 			tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
 			ft_putstr_fd(list->curr_elem->data, list->fd);
 			list->curr_elem = list->curr_elem->next;
 			cursor->y++;
-			i++;
 		}
 	}
 }
