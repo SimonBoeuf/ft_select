@@ -72,7 +72,7 @@ t_list				*ft_getlist(int ac, char **av)
 			ft_elem_add(list->first_elem, ptr);
 			i++;
 		}
-		list->curr_elem = list->first_elem->prev;
+		list->curr_elem = list->first_elem;
 		list->nb_elem = ac;
 	}
 	return (list);

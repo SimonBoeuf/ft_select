@@ -20,7 +20,7 @@ void				init_sequence(void)
 	tmp = list->curr_elem;
 
 	term = init_term(list->fd);
-	//printf("                     valeur data init->%s, cursor->%d\n", list->curr_elem->data, list->curr_elem->cursor);
+
 
 	w = ft_get_winsize();
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
