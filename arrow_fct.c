@@ -5,8 +5,8 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 	struct winsize w;
 
 	ioctl(0, TIOCGWINSZ, &w);
-	set_effect(list->curr_elem, list->fd);
 	list->curr_elem->cursor = 0;
+	set_effect(list->curr_elem, list->fd);
 	if (arrow == KEYDOWN)
 	{
 		cursor->x = list->curr_elem->next->posx;
