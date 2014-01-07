@@ -52,7 +52,7 @@ void				move_cursor(t_cursor *cursor);
 ** list_fct.c
 */
 t_list				*ft_getlist(int ac, char **av);
-t_elem				*ft_elem_init(char *data);
+t_elem				*ft_elem_init(char *data, int cursor);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_elem *elem_to_del);
 void				ft_print_list(t_list *list, int tr, int tc);
@@ -75,7 +75,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char *str, int fd);
 
 /*
-** keyhandler_fct.c
+** keycheck_fct.c
 */
 int					is_rtn(char *buf);
 int        			is_arrow(char *buf);
@@ -85,9 +85,17 @@ int					is_space(char *buf);
 int					is_del(char *buf);
 
 /*
+** keyhandler_fct.c
+*/
+void				launch_space(t_list *list, t_cursor *cursor);
+void				launch_del(t_list *list, t_cursor *cursor);
+void				launch_rtn(t_list *list);
+void				launch_esc();
+
+/*
 ** term_fct.c
 */
-void				init_term(int fd);
+struct termios		*init_term(int fd);
 void				closeterm(void);
 void				init_sequence(void);
 
@@ -102,15 +110,13 @@ void				*ft_memalloc(size_t size);
 ** arrow_fct.c
 */
 void				launch_arrow(int arrow, t_list *list, t_cursor *cursor);
-void				launch_space(t_list *list, t_cursor *cursor);
-void				launch_del(t_list *list, t_cursor *cursor);
-void				launch_rtn(t_list *list);
-void				launch_esc();
+void				mvleft(t_list *l, t_cursor *c, int y);
+void				mvright(t_list *l, t_cursor *c, int y);
 
 /*
 ** effect_fct.c
 */
-void				set_effect(t_elem *elem, int underline, int fd);
+void				set_effect(t_elem *elem, int fd);
 
 /*
 ** misc.c

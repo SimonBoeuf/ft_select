@@ -1,6 +1,6 @@
 #include "./includes/ft_select.h"
 
-t_elem				*ft_elem_init(char *data)
+t_elem				*ft_elem_init(char *data, int cursor)
 {
 	t_elem			*new_elem;
 
@@ -10,7 +10,7 @@ t_elem				*ft_elem_init(char *data)
 		ft_error(1, 2);
 	new_elem->prev = new_elem;
 	new_elem->next = new_elem;
-	new_elem->cursor = 0;
+	new_elem->cursor = cursor;
 	new_elem->selected = 0;
 	return (new_elem);
 }
@@ -62,7 +62,7 @@ t_list				*ft_getlist(int ac, char **av)
 	{
 		list = (t_list*)malloc(sizeof(t_list));
 		list->fd = open(ttyname(0), O_WRONLY);
-		list->first_elem = ft_elem_init(*av);
+		list->first_elem = ft_elem_init(*av, 1);
 		list->longest = 0;
 		av++;
 		i = 1;
@@ -70,7 +70,7 @@ t_list				*ft_getlist(int ac, char **av)
 		{
 			if (list->longest < ft_strlen(*av))
 				list->longest = ft_strlen(*av);
-			ptr = ft_elem_init(*(av++));
+			ptr = ft_elem_init(*(av++), 0);
 			ft_elem_add(list->first_elem, ptr);
 			i++;
 		}
@@ -102,7 +102,7 @@ void	ft_print_list(t_list *list, int tr, int tc)
 			list->curr_elem->posx = cursor->x;
 			list->curr_elem->posy = cursor->y;
 			move_cursor(cursor);
-			set_effect(list->curr_elem, 0, list->fd);
+			set_effect(list->curr_elem, list->fd);
 			list->curr_elem = list->curr_elem->next;
 			cursor->y++;
 		}

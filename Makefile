@@ -5,7 +5,7 @@ INCLUDE		= ./includes/
 
 SRC			= 	main.c list_fct.c put_fct.c str_fct.c sighandler_fct.c 		\
 				keyhandler_fct.c cursor_fct.c term_fct.c divers_fct.c misc.c \
-				arrow_fct.c effect_fct.c
+				arrow_fct.c effect_fct.c keycheck_fct.c
 
 CFLAGS		= -Wall -Werror -Wextra -ltermcap
 

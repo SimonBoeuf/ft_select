@@ -7,7 +7,7 @@ void			init_sequence(void)
 	struct winsize	w;
 	struct termios	*term;
 
-	list = ft_getlist(0, NULL);
+	list = ft_getlist(0, 0);
 	ioctl(0, TIOCGWINSZ, &w);
 	term = init_term(list->fd);
 	cursor = init_cursor(0, 0);
@@ -16,7 +16,7 @@ void			init_sequence(void)
 	readkeys(list, cursor);
 }
 
-struct termios	*init_term(int	fd)
+struct termios	*init_term(int fd)
 {
 	struct termios *term;
 

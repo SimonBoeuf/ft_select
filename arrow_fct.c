@@ -2,83 +2,77 @@
 
 void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 {
+	struct winsize w;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	set_effect(list->curr_elem, list->fd);
 	if (arrow == KEYDOWN)
 	{
-		set_effect(list->curr_elem, 0, list->fd);
 		cursor->x = list->curr_elem->next->posx;
 		cursor->y = list->curr_elem->next->posy;
 		list->curr_elem = list->curr_elem->next;
 	}
 	else if (arrow == KEYUP)
 	{
-		set_effect(list->curr_elem, 0, list->fd);
 		cursor->x = list->curr_elem->prev->posx;
 		cursor->y = list->curr_elem->prev->posy;
 		list->curr_elem = list->curr_elem->prev;
 	}
+	else if (arrow == KEYLEFT)
+		mvleft(list, cursor, w.ws_row - 1);
+	else if (arrow == KEYRIGHT)
+		mvright(list, cursor, w.ws_row - 1);
 	move_cursor(cursor);
-	set_effect(list->curr_elem, 1, list->fd);
-	move_cursor(cursor);
-}
-
-void	launch_space(t_list *list, t_cursor *cursor)
-{
-	if (list->curr_elem->selected)
-		list->curr_elem->selected = 0;
-	else
-		list->curr_elem->selected = 1;
-	set_effect(list->curr_elem, 1, list->fd);
+	set_effect(list->curr_elem, list->fd);
 	move_cursor(cursor);
 }
 
-void	launch_del(t_list *list, t_cursor *cursor)
+void	mvleft(t_list *l, t_cursor *c, int y)
 {
+	int	nbcols;
+	int	nbrows;
+	int	i;
+	int	last;
 
-	char		*clear_screen;
-
-	clear_screen = tgetstr("cl", NULL);
-	tputs(clear_screen, 1, ft_putchar);
-	if (list->curr_elem == list->first_elem)
-		list->first_elem = list->first_elem->next;
-	else if (list->curr_elem == list->first_elem->prev)
+	nbrows = l->nb_elem > y ? y : l->nb_elem;
+	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows) + 1;
+	last = l->nb_elem % nbrows == 0 ? l->nb_elem : l->nb_elem % nbrows;
+	if (nbcols > 1)
 	{
-		cursor->x = 0;
-		cursor->y = 0;
+		if (l->curr_elem->posy < last && l->curr_elem->posx == 0)
+			nbrows = last;
+		if (l->curr_elem->posy >= last && l->curr_elem->posx == 0)
+			nbrows += last;
 	}
-	list->curr_elem = ft_elem_del(list->curr_elem);
-	list->nb_elem--;
-	init_sequence();
-	move_cursor(cursor);
+	i = -1;
+	while (++i < nbrows)
+		l->curr_elem = l->curr_elem->prev;
+	c->x = l->curr_elem->posx;
+	c->y = l->curr_elem->posy;
 }
 
-void	launch_rtn(t_list *list)
+void	mvright(t_list *l, t_cursor *c, int y)
 {
-	int		i;
-	int		first_print;
-	t_elem	*ptr;
+	int	nbcols;
+	int	nbrows;
+	int	i;
+	int	last;
 
-	closeterm();
-	i = 0;
-	first_print = 0;
-	ptr = list->first_elem;
-	while (i < list->nb_elem)
+	nbrows = l->nb_elem > y ? y : l->nb_elem;
+	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows) + 1;
+	last = l->nb_elem % nbrows == 0 ? l->nb_elem : l->nb_elem % nbrows;
+	if (nbcols > 1)
 	{
-		if (ptr->selected == 1)
-		{
-			if (first_print == 1)
-				ft_putchar(' ');
-			ft_putstr(ptr->data);
-			first_print = 1;
-		}
-		ptr = ptr->next;
-		i++;
+		if (l->curr_elem->posy < last &&
+				l->curr_elem->posx == (nbcols - 1) * ((int)l->longest + 4))
+			nbrows = last;
+		if (l->curr_elem->posy >= last &&
+				l->curr_elem->posx == (nbcols - 2) * ((int)l->longest + 4))
+			nbrows += last;
 	}
-	ft_putchar('\n');
-	exit(0);
-}
-
-void	launch_esc()
-{
-	closeterm();
-	exit(0);
+	i = -1;
+	while (++i < nbrows)
+		l->curr_elem = l->curr_elem->next;
+	c->x = l->curr_elem->posx;
+	c->y = l->curr_elem->posy;
 }
