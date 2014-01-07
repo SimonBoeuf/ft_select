@@ -1,21 +1,19 @@
 #include "./includes/ft_select.h"
 
-void			init_sequence(t_list *list)
+void			init_sequence(void)
 {
-	int			i;
-	t_elem		*ptr;
+	t_list			*list;
+	t_cursor		*cursor;
+	struct winsize	w;
+	struct termios	*term;
 
-	i = 0;
-	ptr = list->first_elem;
-	while (i < list->nb_elem)
-	{
-		if (ptr != list->curr_elem)
-			set_effect(ptr, 0, list->fd);
-		else
-			set_effect(ptr, 1, list->fd);
-		i++;
-		ptr = ptr->next;
-	}
+	list = ft_getlist(0, NULL);
+	ioctl(0, TIOCGWINSZ, &w);
+	term = init_term(list->fd);
+	cursor = init_cursor(0, 0);
+	ft_print_list(list, w.ws_row - 1, w.ws_col);
+	move_cursor(cursor);
+	readkeys(list, cursor);
 }
 
 struct termios	*init_term(int	fd)

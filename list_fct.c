@@ -101,8 +101,8 @@ void	ft_print_list(t_list *list, int tr, int tc)
 			}
 			list->curr_elem->posx = cursor->x;
 			list->curr_elem->posy = cursor->y;
-			tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
-			ft_putstr_fd(list->curr_elem->data, list->fd);
+			move_cursor(cursor);
+			set_effect(list->curr_elem, 0, list->fd);
 			list->curr_elem = list->curr_elem->next;
 			cursor->y++;
 		}

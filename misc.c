@@ -16,8 +16,6 @@ void	readkeys(t_list *list, t_cursor *cur)
 			launch_esc();
 		if ((key = is_arrow(read_char)))
 			launch_arrow(key, list, cur);
-		else if ((key = is_arrow(read_char)))
-			launch_arrow(key, list, cur);
 		else if ((key = is_space(read_char)))
 			launch_space(list, cur);
 		else if ((key = is_del(read_char)))

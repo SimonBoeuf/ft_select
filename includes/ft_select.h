@@ -87,9 +87,9 @@ int					is_del(char *buf);
 /*
 ** term_fct.c
 */
-struct termios		*init_term(int fd);
+void				init_term(int fd);
 void				closeterm(void);
-void				init_sequence(t_list *list);
+void				init_sequence(void);
 
 /*
 ** divers_fct.c

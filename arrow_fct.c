@@ -47,7 +47,7 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	}
 	list->curr_elem = ft_elem_del(list->curr_elem);
 	list->nb_elem--;
-	init_sequence(list);
+	init_sequence();
 	move_cursor(cursor);
 }
 
