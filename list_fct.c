@@ -84,26 +84,27 @@ t_list				*ft_initialize(int ac, char **av)
 void	ft_print_list(t_list *list, int tr, int tc)
 {
 	int	i;
-	int	wcol;
 	t_cursor	*cursor;
 
 	cursor = init_cursor(0, 0);
 	list->curr_elem = list->first_elem;
 	i = 1;
-	wcol = list->longest + 4;
-	if (list->nb_elem * wcol > tc * tr)
-		printf("window too small");
-	while (i < list->nb_elem)
+	if (list->nb_elem * (int)(list->longest + 4) > tc * tr)
+		ft_putstr_fd("window too small", list->fd);
+	else
 	{
-		if (cursor->y == tr)
+		while (i < list->nb_elem)
 		{
-			cursor->y = 0;
-			cursor->x += wcol;
+			if (cursor->y == tr)
+			{
+				cursor->y = 0;
+				cursor->x += list->longest + 4;
+			}
+			tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
+			ft_putstr_fd(list->curr_elem->data, list->fd);
+			list->curr_elem = list->curr_elem->next;
+			cursor->y++;
+			i++;
 		}
-		tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
-		ft_putstr_fd(list->curr_elem->data, list->fd);
-		list->curr_elem = list->curr_elem->next;
-		cursor->y++;
-		i++;
 	}
 }
