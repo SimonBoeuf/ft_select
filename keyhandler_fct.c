@@ -1,29 +1,63 @@
-#include "./includes/ft_select.h"
+#include "includes/ft_select.h"
 
-int		is_rtn(char *buf)
+void	launch_space(t_list *list, t_cursor *cursor)
 {
-	return (buf[0] == 10);
+	if (list->curr_elem->selected)
+		list->curr_elem->selected = 0;
+	else
+		list->curr_elem->selected = 1;
+	set_effect(list->curr_elem, 1, list->fd);
+	move_cursor(cursor);
 }
 
-int		is_arrow(char *buf)
+void	launch_del(t_list *list, t_cursor *cursor)
 {
-	if (buf[0] != 27 || buf[1] != 91 || buf[2] < 65 || buf[2] > 68)
-		return (0);
-	return (buf[2] - 64);
+
+	char		*clear_screen;
+
+	clear_screen = tgetstr("cl", NULL);
+	tputs(clear_screen, 1, ft_putchar);
+	if (list->curr_elem == list->first_elem)
+		list->first_elem = list->first_elem->next;
+	else if (list->curr_elem == list->first_elem->prev)
+	{
+		cursor->x = 0;
+		cursor->y = 0;
+	}
+	list->curr_elem = ft_elem_del(list->curr_elem);
+	list->nb_elem--;
+	init_sequence(list);
+	move_cursor(cursor);
 }
 
-int		is_esc(char *buf)
+void	launch_rtn(t_list *list)
 {
-	return (buf[0] == 27 && buf[1] == 0 && buf[2] == 0);
+	int		i;
+	int		first_print;
+	t_elem	*ptr;
+
+	closeterm();
+	i = 0;
+	first_print = 0;
+	ptr = list->first_elem;
+	while (i < list->nb_elem)
+	{
+		if (ptr->selected == 1)
+		{
+			if (first_print == 1)
+				ft_putchar(' ');
+			ft_putstr(ptr->data);
+			first_print = 1;
+		}
+		ptr = ptr->next;
+		i++;
+	}
+	ft_putchar('\n');
+	exit(0);
 }
 
-int		is_space(char *buf)
+void	launch_esc()
 {
-	return (buf[0] == 32);
-}
-
-int		is_del(char *buf)
-{
-	return ((buf[0] == 27 && buf[1] == 91 && buf[2] == 51) ||
-			(buf[0] == 127 && buf[1] == 0 && buf[2] == 0));
+	closeterm();
+	exit(0);
 }
