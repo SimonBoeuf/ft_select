@@ -12,7 +12,6 @@ void	readkeys(t_list *list, t_cursor *cur)
 	keep_reading = 1;
 	while (read(0, read_char, 3))
 	{
-		//printf("%d\t%d\t%d\n", read_char[0],read_char[1],read_char[2]);
 		if (is_esc(read_char))
 			launch_esc();
 		if ((key = is_arrow(read_char)))

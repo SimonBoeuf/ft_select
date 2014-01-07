@@ -16,7 +16,7 @@ int					main(int argc, char **argv)
 	ioctl(0, TIOCGWINSZ, &w);
 	term = init_term(list->fd);
 	cursor = init_cursor(0, 0);
-	ft_print_list(list, w.ws_row, w.ws_col);
+	ft_print_list(list, w.ws_row - 1, w.ws_col);
 	move_cursor(cursor);
 	readkeys(list, cursor);
 	closeterm();
