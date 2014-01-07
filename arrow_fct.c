@@ -6,6 +6,7 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 
 	ioctl(0, TIOCGWINSZ, &w);
 	set_effect(list->curr_elem, 0, list->fd);
+	list->curr_elem->cursor = 0;
 	if (arrow == KEYDOWN)
 	{
 		cursor->x = list->curr_elem->next->posx;
@@ -22,6 +23,7 @@ void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 		mvleft(list, cursor, w.ws_row - 1);
 	else if (arrow == KEYRIGHT)
 		mvright(list, cursor, w.ws_row - 1);
+	list->curr_elem->cursor = 1;
 	move_cursor(cursor);
 	set_effect(list->curr_elem, 1, list->fd);
 	move_cursor(cursor);
