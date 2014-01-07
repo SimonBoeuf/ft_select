@@ -36,19 +36,17 @@ void				ft_elem_add(t_elem *first_elem, t_elem *elem_to_add)
 	}
 }
 
-t_elem				*ft_elem_del(t_elem *elem_to_del)
+t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del)
 {
-	t_elem			*ptr_prev;
 	t_elem			*ptr_next;
 
-	ptr_prev = elem_to_del->prev;
 	ptr_next = elem_to_del->next;
-	if (ptr_prev && ptr_next)
-	{
-		ptr_prev->next = ptr_next;
-		ptr_next->prev = ptr_prev;
-	}
+	if (elem_to_del == list->first_elem)
+		list->first_elem = ptr_next;
+	elem_to_del->prev->next = ptr_next;
+	ptr_next->prev = elem_to_del->prev;
 	free(elem_to_del);
+	ptr_next->cursor = 1;
 	return (ptr_next);
 }
 
@@ -80,16 +78,19 @@ t_list				*ft_getlist(int ac, char **av)
 	return (list);
 }
 
-void	ft_print_list(t_list *list, int tr, int tc)
+int					ft_print_list(t_list *list, int tr, int tc)
 {
-	int	i;
-	t_cursor	*cursor;
+	int				i;
+	t_cursor		*cursor;
 
 	cursor = init_cursor(0, 0);
 	list->curr_elem = list->first_elem;
 	i = 0;
 	if (list->nb_elem * (int)(list->longest + 4) > tc * tr)
+	{
 		ft_putstr_fd("window too small", list->fd);
+		return (0);
+	}
 	else
 	{
 		while (i++ < list->nb_elem)
@@ -107,4 +108,5 @@ void	ft_print_list(t_list *list, int tr, int tc)
 			cursor->y++;
 		}
 	}
+	return (1);
 }
