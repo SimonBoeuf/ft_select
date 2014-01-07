@@ -9,6 +9,7 @@ void	readkeys(t_list *list, t_cursor *cur)
 
 	signal(SIGCONT, catch_cont);
 	signal(SIGINT, catch_int);
+	signal(SIGWINCH, catch_resize);
 	read_char = ft_strnew(4);
 	keep_reading = 1;
 	while (read(0, read_char, 3))

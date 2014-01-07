@@ -20,7 +20,6 @@ void				init_sequence(void)
 	cursor = init_cursor(list->curr_elem->posx, list->curr_elem->posy);
 	w = ft_get_winsize();
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
-	printf("                            y = %d\n", cursor->y);
 	move_cursor(cursor);
 }
 

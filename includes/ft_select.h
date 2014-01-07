@@ -131,5 +131,6 @@ int					is_win_to_small(t_list *list);
 */
 void				catch_cont(int sig);
 void				catch_int(int sig);
+void				catch_resize(int s);
 
 #endif /* !FT_SELECT_H */
