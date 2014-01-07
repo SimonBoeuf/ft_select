@@ -1,11 +1,11 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
+# include <stdlib.h> /* getenv */
+# include <unistd.h> /* write */
+# include <stdio.h>
 # include <termios.h>
 # include <termcap.h>
-# include <unistd.h> /* write */
-# include <stdlib.h> /* getenv */
-# include <stdio.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
 
@@ -54,8 +54,8 @@ void				move_cursor(t_cursor *cursor);
 t_list				*ft_getlist(int ac, char **av);
 t_elem				*ft_elem_init(char *data, int cursor);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
-t_elem				*ft_elem_del(t_elem *elem_to_del);
-void				ft_print_list(t_list *list, int tr, int tc);
+t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del);
+int					ft_print_list(t_list *list, int tr, int tc);
 
 /*
 ** str_fct.c
@@ -98,6 +98,7 @@ void				launch_esc();
 struct termios		*init_term(int fd);
 void				closeterm(void);
 void				init_sequence(void);
+struct winsize		ft_get_winsize(void);
 
 /*
 ** divers_fct.c

@@ -1,4 +1,4 @@
-#include "includes/ft_select.h"
+#include "./includes/ft_select.h"
 
 void	launch_space(t_list *list, t_cursor *cursor)
 {
@@ -12,18 +12,13 @@ void	launch_space(t_list *list, t_cursor *cursor)
 
 void	launch_del(t_list *list, t_cursor *cursor)
 {
-	char		*clear_screen;
+	t_elem				*tmp;
+	char				*clear_screen;
+	struct winsize		w;
 
 	clear_screen = tgetstr("cl", NULL);
 	tputs(clear_screen, 1, ft_putchar);
-	if (list->curr_elem == list->first_elem)
-		list->first_elem = list->first_elem->next;
-	else if (list->curr_elem == list->first_elem->prev)
-	{
-		cursor->x = 0;
-		cursor->y = 0;
-	}
-	list->curr_elem = ft_elem_del(list->curr_elem);
+	list->curr_elem = ft_elem_del(list, list->curr_elem);
 	list->nb_elem--;
 	if (!list->nb_elem)
 	{
@@ -31,8 +26,17 @@ void	launch_del(t_list *list, t_cursor *cursor)
 		ft_putstr_fd("No more elements on the list.\n", 1);
 		exit(0);
 	}
-	init_sequence();
-	move_cursor(cursor);
+	w = ft_get_winsize();
+	tmp = list->curr_elem;
+	if (ft_print_list(list, w.ws_row - 1, w.ws_col))
+	{
+		list->curr_elem = tmp;
+		cursor->x = list->curr_elem->posx;
+		cursor->y = list->curr_elem->posy;
+		move_cursor(cursor);
+		set_effect(list->curr_elem, list->fd);
+		move_cursor(cursor);
+	}
 }
 
 void	launch_rtn(t_list *list)

@@ -1,22 +1,26 @@
 #include "./includes/ft_select.h"
 
-void			init_sequence(void)
+struct winsize		ft_get_winsize(void)
 {
-	t_list			*list;
-	t_cursor		*cursor;
 	struct winsize	w;
-	struct termios	*term;
 
-	list = ft_getlist(0, 0);
 	ioctl(0, TIOCGWINSZ, &w);
-	term = init_term(list->fd);
-	cursor = init_cursor(0, 0);
-	ft_print_list(list, w.ws_row - 1, w.ws_col);
-	move_cursor(cursor);
-	readkeys(list, cursor);
+	return (w);
 }
 
-struct termios	*init_term(int fd)
+void				init_sequence(void)
+{
+	t_list				*list;
+	struct winsize	w;
+	struct termios		*term;
+
+	list = ft_getlist(0, 0);
+	w = ft_get_winsize();
+	term = init_term(list->fd);
+	ft_print_list(list, w.ws_row - 1, w.ws_col);
+}
+
+struct termios		*init_term(int fd)
 {
 	struct termios *term;
 
@@ -31,7 +35,7 @@ struct termios	*init_term(int fd)
 	return (term);
 }
 
-void	closeterm(void)
+void				closeterm(void)
 {
 	struct termios	*term;
 
