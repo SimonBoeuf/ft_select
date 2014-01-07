@@ -47,6 +47,7 @@ extern int	keep_reading;
 */
 t_cursor			*init_cursor(int x, int y);
 void				move_cursor(t_cursor *cursor);
+t_cursor			*seek_cursor(t_list *list);
 
 /*
 ** list_fct.c

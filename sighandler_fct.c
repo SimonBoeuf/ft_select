@@ -4,7 +4,7 @@ int	keep_reading;
 void	catch_cont(int s)
 {
 	s = s;
-	init_term(0);
+	init_sequence();
 }
 
 void	catch_int(int s)

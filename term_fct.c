@@ -11,13 +11,17 @@ struct winsize		ft_get_winsize(void)
 void				init_sequence(void)
 {
 	t_list				*list;
-	struct winsize	w;
+	t_cursor			*cursor;
+	struct winsize		w;
 	struct termios		*term;
 
-	list = ft_getlist(0, 0);
-	w = ft_get_winsize();
+	list = ft_getlist(0, NULL);
 	term = init_term(list->fd);
+	cursor = init_cursor(list->curr_elem->posx, list->curr_elem->posy);
+	w = ft_get_winsize();
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
+	printf("                            y = %d\n", cursor->y);
+	move_cursor(cursor);
 }
 
 struct termios		*init_term(int fd)
