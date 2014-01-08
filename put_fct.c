@@ -4,7 +4,7 @@ int		ft_putchar(int c)
 {
 	int		fd;
 
-	fd = open("/dev/tty", O_WRONLY);
+	fd = open(ttyname(0), O_WRONLY);
 	write(fd, &c, 1);
 	close(fd);
 	return (1);

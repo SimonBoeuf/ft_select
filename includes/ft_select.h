@@ -55,7 +55,7 @@ t_list				*ft_getlist(int ac, char **av);
 t_elem				*ft_elem_init(char *data, int cursor);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del);
-void				ft_print_list(t_list *list, int tr, int tc);
+void				ft_print_list(t_list *list, int tr);
 
 /*
 ** str_fct.c
@@ -64,7 +64,7 @@ char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *str);
 char				*ft_strcpy(char *s1, const char *s2);
 char				*ft_strnew(size_t size);
-void				ft_putstr_space(char *str, int first_print);
+void				ft_strdel(char **as);
 
 /*
 ** put_fct.c
@@ -124,7 +124,7 @@ void				set_effect(t_elem *elem, int fd);
 ** misc.c
 */
 void				readkeys(t_list *list, t_cursor *cur);
-int					is_win_to_small(t_list *list);
+int					is_win_too_small(t_list *list);
 
 /*
 ** sighandler_fct.c

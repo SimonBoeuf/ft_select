@@ -12,12 +12,12 @@ CFLAGS		= -Wall -Werror -Wextra -ltermcap
 all:		$(NAME)
 
 $(NAME):
-			$(CC) $(CFLAGS) -o $(NAME) -I $(INCLUDE) $(SRC)
+			@$(CC) $(CFLAGS) -o $(NAME) -I $(INCLUDE) $(SRC)
 
 clean:
 
 fclean:		clean
-			rm -rf $(NAME)
+			@rm -rf $(NAME)
 
 re:			fclean all
 

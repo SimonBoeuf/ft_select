@@ -31,7 +31,7 @@ void	readkeys(t_list *list, t_cursor *cur)
 	read_char = ft_strnew(4);
 	while (read(0, read_char, 3))
 	{
-		to_small = is_win_to_small(list);
+		to_small = is_win_too_small(list);
 		if (is_esc(read_char))
 			launch_esc();
 		else if ((key = is_del(read_char)) && !to_small)
@@ -46,10 +46,17 @@ void	readkeys(t_list *list, t_cursor *cur)
 	}
 }
 
-int		is_win_to_small(t_list *list)
+int		is_win_too_small(t_list *list)
 {
 	struct winsize		w;
+	int					nb_col;
 
 	w = ft_get_winsize();
-	return ((list->nb_elem * (int)(list->longest + 4)) > (w.ws_row * w.ws_col));
+	nb_col = (list->nb_elem / w.ws_row) + 1;
+	if ((list->nb_elem % w.ws_row) != 0)
+		nb_col++;
+//	printf("                                nb_col = %d\n", nb_col);
+//	printf("                                list_total = %d\n", (nb_col * (((int)list->longest) + 4) - 4));
+//	printf("                                ws_col = %d\n", (w.ws_col));
+	return ((nb_col * (((int)list->longest) + 4)) - 4 > (w.ws_col));
 }
