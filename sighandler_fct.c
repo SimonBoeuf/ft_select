@@ -16,7 +16,8 @@ void	catch_cont(void)
 void	catch_int(void)
 {
 	closeterm();
-	exit(1);
+	ft_del_list(ft_getlist(0, NULL));
+	exit(0);
 }
 
 void	catch_resize(void)

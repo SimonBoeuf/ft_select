@@ -1,6 +1,5 @@
 #include "./includes/ft_select.h"
 
-
 void	catch(int s)
 {
 	if (s == SIGTSTP)
@@ -32,8 +31,10 @@ void	readkeys(t_list *list, t_cursor *cur)
 	while (read(0, read_char, 3))
 	{
 		to_small = is_win_too_small(list);
-		if (is_esc(read_char))
+		if ((key = is_esc(read_char)))
+		{
 			launch_esc();
+		}
 		else if ((key = is_del(read_char)) && !to_small)
 			launch_del(list, cur);
 		else if ((key = is_arrow(read_char)) && !to_small)
@@ -55,8 +56,5 @@ int		is_win_too_small(t_list *list)
 	nb_col = (list->nb_elem / w.ws_row) + 1;
 	if ((list->nb_elem % w.ws_row) != 0)
 		nb_col++;
-//	printf("                                nb_col = %d\n", nb_col);
-//	printf("                                list_total = %d\n", (nb_col * (((int)list->longest) + 4) - 4));
-//	printf("                                ws_col = %d\n", (w.ws_col));
 	return ((nb_col * (((int)list->longest) + 4)) - 4 > (w.ws_col));
 }

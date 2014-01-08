@@ -15,8 +15,6 @@ void	launch_space(t_list *list, t_cursor *cursor)
 	move_cursor(cursor);
 	set_effect(list->curr_elem, list->fd);
 	move_cursor(cursor);
-
-
 }
 
 void	launch_del(t_list *list, t_cursor *cursor)
@@ -31,20 +29,18 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	if (!list->nb_elem)
 	{
 		closeterm();
+		ft_del_list(list);
 		exit(0);
 	}
 	w = ft_get_winsize();
 	tmp = list->curr_elem;
 	ft_print_list(list, w.ws_row - 1);
-	if (!is_win_too_small(list))
-	{
-		list->curr_elem = tmp;
-		cursor->x = list->curr_elem->posx;
-		cursor->y = list->curr_elem->posy;
-		move_cursor(cursor);
-		set_effect(list->curr_elem, list->fd);
-		move_cursor(cursor);
-	}
+	list->curr_elem = tmp;
+	cursor->x = list->curr_elem->posx;
+	cursor->y = list->curr_elem->posy;
+	move_cursor(cursor);
+	set_effect(list->curr_elem, list->fd);
+	move_cursor(cursor);
 }
 
 void	launch_rtn(t_list *list)
@@ -70,11 +66,13 @@ void	launch_rtn(t_list *list)
 		i++;
 	}
 	ft_putchar_fd('\n', 1);
+	ft_del_list(list);
 	exit(0);
 }
 
 void	launch_esc(void)
 {
 	closeterm();
+	ft_del_list(list);
 	exit(0);
 }

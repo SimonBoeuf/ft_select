@@ -49,13 +49,18 @@ void				move_cursor(t_cursor *cursor);
 t_cursor			*seek_cursor(t_list *list);
 
 /*
-** list_fct.c
+** elem_fct.c
 */
-t_list				*ft_getlist(int ac, char **av);
 t_elem				*ft_elem_init(char *data, int cursor);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del);
+
+/*
+** list_fct.c
+*/
+t_list				*ft_getlist(int ac, char **av);
 void				ft_print_list(t_list *list, int tr);
+void				ft_del_list(t_list *list);
 
 /*
 ** str_fct.c
