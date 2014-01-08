@@ -6,8 +6,17 @@ void	launch_space(t_list *list, t_cursor *cursor)
 		list->curr_elem->selected = 0;
 	else
 		list->curr_elem->selected = 1;
+	list->curr_elem->cursor = 0;
+	set_effect(list->curr_elem, list->fd);
+	list->curr_elem = list->curr_elem->next;
+	list->curr_elem->cursor = 1;
+	cursor->x = list->curr_elem->posx;
+	cursor->y = list->curr_elem->posy;
+	move_cursor(cursor);
 	set_effect(list->curr_elem, list->fd);
 	move_cursor(cursor);
+
+
 }
 
 void	launch_del(t_list *list, t_cursor *cursor)
@@ -22,7 +31,6 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	if (!list->nb_elem)
 	{
 		closeterm();
-		ft_putstr_fd("No more elements in the list.\n", 1);
 		exit(0);
 	}
 	w = ft_get_winsize();
