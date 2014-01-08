@@ -73,6 +73,6 @@ void	launch_rtn(t_list *list)
 void	launch_esc(void)
 {
 	closeterm();
-	ft_del_list(list);
+	ft_del_list(ft_getlist(0, NULL));
 	exit(0);
 }
