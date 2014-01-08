@@ -19,16 +19,16 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	clear_screen = tgetstr("cl", NULL);
 	tputs(clear_screen, 1, ft_putchar);
 	list->curr_elem = ft_elem_del(list, list->curr_elem);
-	list->nb_elem--;
 	if (!list->nb_elem)
 	{
 		closeterm();
-		ft_putstr_fd("No more elements on the list.\n", 1);
+		ft_putstr_fd("No more elements in the list.\n", 1);
 		exit(0);
 	}
 	w = ft_get_winsize();
 	tmp = list->curr_elem;
-	if (ft_print_list(list, w.ws_row - 1, w.ws_col))
+	ft_print_list(list, w.ws_row - 1, w.ws_col);
+	if(!is_win_to_small(list))
 	{
 		list->curr_elem = tmp;
 		cursor->x = list->curr_elem->posx;

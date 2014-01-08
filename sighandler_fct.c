@@ -21,9 +21,6 @@ void	catch_int(void)
 
 void	catch_resize(void)
 {
-	struct winsize w;
-
-	ioctl(0, TIOCGWINSZ, &w);
 	tputs(tgetstr("cl", NULL), 1, ft_putchar);
 	init_sequence();
 }

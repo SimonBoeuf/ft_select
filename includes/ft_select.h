@@ -56,7 +56,7 @@ t_list				*ft_getlist(int ac, char **av);
 t_elem				*ft_elem_init(char *data, int cursor);
 void				ft_elem_add(t_elem *elem_list, t_elem *elem_to_add);
 t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del);
-int					ft_print_list(t_list *list, int tr, int tc);
+void				ft_print_list(t_list *list, int tr, int tc);
 
 /*
 ** str_fct.c

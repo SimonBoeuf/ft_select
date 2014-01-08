@@ -45,6 +45,7 @@ t_elem				*ft_elem_del(t_list *list, t_elem *elem_to_del)
 		list->first_elem = ptr_next;
 	elem_to_del->prev->next = ptr_next;
 	ptr_next->prev = elem_to_del->prev;
+	list->nb_elem--;
 	free(elem_to_del);
 	ptr_next->cursor = 1;
 	return (ptr_next);
@@ -78,7 +79,7 @@ t_list				*ft_getlist(int ac, char **av)
 	return (list);
 }
 
-int					ft_print_list(t_list *list, int tr, int tc)
+void				ft_print_list(t_list *list, int tr, int tc)
 {
 	int				i;
 	t_cursor		*cursor;
@@ -87,10 +88,7 @@ int					ft_print_list(t_list *list, int tr, int tc)
 	list->curr_elem = list->first_elem;
 	i = 0;
 	if (list->nb_elem * (int)(list->longest + 4) > tc * tr)
-	{
 		ft_putstr_fd("window too small", list->fd);
-		return (0);
-	}
 	else
 	{
 		while (i++ < list->nb_elem)
@@ -108,5 +106,4 @@ int					ft_print_list(t_list *list, int tr, int tc)
 			cursor->y++;
 		}
 	}
-	return (1);
 }
