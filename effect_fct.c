@@ -2,7 +2,6 @@
 
 void	set_effect(t_elem *elem, int fd)
 {
-
 	if (elem->selected)
 		tputs(tgetstr("mr", NULL), 1, ft_putchar);
 	if (elem->cursor)

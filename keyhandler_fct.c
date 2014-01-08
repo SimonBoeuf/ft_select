@@ -28,7 +28,7 @@ void	launch_del(t_list *list, t_cursor *cursor)
 	w = ft_get_winsize();
 	tmp = list->curr_elem;
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
-	if(!is_win_to_small(list))
+	if (!is_win_to_small(list))
 	{
 		list->curr_elem = tmp;
 		cursor->x = list->curr_elem->posx;
@@ -65,7 +65,7 @@ void	launch_rtn(t_list *list)
 	exit(0);
 }
 
-void	launch_esc()
+void	launch_esc(void)
 {
 	closeterm();
 	exit(0);

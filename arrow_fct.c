@@ -2,7 +2,7 @@
 
 void	launch_arrow(int arrow, t_list *list, t_cursor *cursor)
 {
-	struct winsize w;
+	struct winsize	w;
 
 	ioctl(0, TIOCGWINSZ, &w);
 	list->curr_elem->cursor = 0;

@@ -18,10 +18,7 @@ void				init_sequence(void)
 
 	list = ft_getlist(0, NULL);
 	tmp = list->curr_elem;
-
 	term = init_term(list->fd);
-
-
 	w = ft_get_winsize();
 	ft_print_list(list, w.ws_row - 1, w.ws_col);
 	list->curr_elem = tmp;

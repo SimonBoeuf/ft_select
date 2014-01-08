@@ -1,6 +1,6 @@
 #include "./includes/ft_select.h"
 
-void				ft_error(int err, int fd)
+void	ft_error(int err, int fd)
 {
 	if (err == 1)
 		ft_putstr_fd("Error : Insuffisant memory.\n", fd);
@@ -22,5 +22,4 @@ void	*ft_memalloc(size_t size)
 		return (NULL);
 	ft_bzero(result, size);
 	return (result);
-
 }

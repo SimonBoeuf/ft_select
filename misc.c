@@ -1,5 +1,5 @@
 #include "./includes/ft_select.h"
-int		keep_reading;
+
 
 void	catch(int s)
 {
@@ -13,7 +13,7 @@ void	catch(int s)
 		catch_resize();
 }
 
-void	ft_check_signal()
+void	ft_check_signal(void)
 {
 	signal(SIGTSTP, catch);
 	signal(SIGCONT, catch);
@@ -23,6 +23,7 @@ void	ft_check_signal()
 
 void	readkeys(t_list *list, t_cursor *cur)
 {
+	int		keep_reading;
 	char	*read_char;
 	int		key;
 	int		to_small;

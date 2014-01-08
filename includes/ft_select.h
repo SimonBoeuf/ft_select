@@ -41,7 +41,6 @@ typedef struct		s_cursor
 	char			*res;
 }					t_cursor;
 
-extern int	keep_reading;
 /*
 ** cursor_fct.c
 */

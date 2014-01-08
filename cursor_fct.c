@@ -11,7 +11,7 @@ t_cursor	*init_cursor(int x, int y)
 	return (c);
 }
 
-void	move_cursor(t_cursor *cursor)
+void		move_cursor(t_cursor *cursor)
 {
 	tputs(tgoto(cursor->res, cursor->x, cursor->y), 1, ft_putchar);
 }
