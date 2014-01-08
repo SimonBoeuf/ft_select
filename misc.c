@@ -23,14 +23,12 @@ void	ft_check_signal(void)
 
 void	readkeys(t_list *list, t_cursor *cur)
 {
-	int		keep_reading;
 	char	*read_char;
 	int		key;
 	int		to_small;
 
 	ft_check_signal();
 	read_char = ft_strnew(4);
-	keep_reading = 1;
 	while (read(0, read_char, 3))
 	{
 		to_small = is_win_to_small(list);

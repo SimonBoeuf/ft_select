@@ -53,15 +53,15 @@ void	launch_rtn(t_list *list)
 	{
 		if (ptr->selected == 1)
 		{
-			if (first_print == 1)
-				ft_putchar(' ');
-			ft_putstr(ptr->data);
+			if (first_print)
+				ft_putchar_fd(' ', 1);
+			ft_putstr_fd(ptr->data, 1);
 			first_print = 1;
 		}
 		ptr = ptr->next;
 		i++;
 	}
-	ft_putchar('\n');
+	ft_putchar_fd('\n', 1);
 	exit(0);
 }
 

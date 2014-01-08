@@ -1,5 +1,12 @@
 #include "./includes/ft_select.h"
 
+void				ft_putstr_space(char *str, int first_print)
+{
+	if (first_print == 1)
+		write(1, " ", 1);
+	write(1, str, ft_strlen(str));
+}
+
 char				*ft_strcpy(char *s1, const char *s2)
 {
 	char	*temp_s1;

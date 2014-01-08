@@ -64,6 +64,7 @@ char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *str);
 char				*ft_strcpy(char *s1, const char *s2);
 char				*ft_strnew(size_t size);
+void				ft_putstr_space(char *str, int first_print);
 
 /*
 ** put_fct.c
