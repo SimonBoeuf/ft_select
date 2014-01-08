@@ -20,11 +20,10 @@ void				init_sequence(void)
 	tmp = list->curr_elem;
 	term = init_term(list->fd);
 	w = ft_get_winsize();
-	ft_print_list(list, w.ws_row - 1, w.ws_col);
+	ft_print_list(list, w.ws_row - 1);
 	list->curr_elem = tmp;
 	cursor = init_cursor(list->curr_elem->posx, list->curr_elem->posy);
 	move_cursor(cursor);
-
 }
 
 struct termios		*init_term(int fd)
@@ -50,6 +49,7 @@ void				closeterm(void)
 	tcgetattr(0, term);
 	term->c_lflag |= (ICANON | ECHO);
 	tcsetattr(0, 0, term);
+	tputs(tgetstr("cl", NULL), 1, ft_putchar);
 	tputs(tgetstr("te", NULL), 1, ft_putchar);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar);
 }

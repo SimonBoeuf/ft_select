@@ -1,13 +1,6 @@
 #include "./includes/ft_select.h"
 
-void				ft_putstr_space(char *str, int first_print)
-{
-	if (first_print == 1)
-		write(1, " ", 1);
-	write(1, str, ft_strlen(str));
-}
-
-char				*ft_strcpy(char *s1, const char *s2)
+char		*ft_strcpy(char *s1, const char *s2)
 {
 	char	*temp_s1;
 
@@ -18,7 +11,7 @@ char				*ft_strcpy(char *s1, const char *s2)
 	return (temp_s1);
 }
 
-char				*ft_strdup(const char *s1)
+char		*ft_strdup(const char *s1)
 {
 	char	*copy;
 
@@ -30,7 +23,7 @@ char				*ft_strdup(const char *s1)
 	return (ft_strcpy(copy, s1));
 }
 
-void	ft_strdel(char **as)
+void		ft_strdel(char **as)
 {
 	if (as != NULL)
 	{
@@ -40,9 +33,9 @@ void	ft_strdel(char **as)
 	}
 }
 
-size_t				ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
-	size_t			i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -50,7 +43,7 @@ size_t				ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strnew(size_t size)
+char		*ft_strnew(size_t size)
 {
 	return ((char *)ft_memalloc(size + 1));
 }

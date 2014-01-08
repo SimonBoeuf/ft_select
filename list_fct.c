@@ -79,7 +79,7 @@ t_list				*ft_getlist(int ac, char **av)
 	return (list);
 }
 
-void				ft_print_list(t_list *list, int tr, int tc)
+void				ft_print_list(t_list *list, int tr)
 {
 	int				i;
 	t_cursor		*cursor;
@@ -87,7 +87,7 @@ void				ft_print_list(t_list *list, int tr, int tc)
 	cursor = init_cursor(0, 0);
 	list->curr_elem = list->first_elem;
 	i = 0;
-	if (list->nb_elem * (int)(list->longest + 4) > tc * tr)
+	if (is_win_too_small(list) != 0)
 		ft_putstr_fd("window too small", list->fd);
 	else
 	{
