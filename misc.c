@@ -20,6 +20,7 @@ void	catch_term(int s)
 
 void	ft_check_signal(void)
 {
+	signal(SIGHUP, catch_term);
 	signal(SIGINT, catch_term);
 	signal(SIGILL, catch_term);
 	signal(SIGTRAP, catch_term);
@@ -38,6 +39,8 @@ void	ft_check_signal(void)
 	signal(SIGVTALRM, catch_term);
 	signal(SIGUSR1, catch_term);
 	signal(SIGUSR2, catch_term);
+	signal(SIGTTIN, catch_term);
+	signal(SIGTTOU, catch_term);
 	signal(SIGTSTP, catch);
 	signal(SIGCONT, catch);
 	signal(SIGINT, catch);
