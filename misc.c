@@ -56,9 +56,7 @@ void	readkeys(t_list *list, t_cursor *cur)
 	{
 		to_small = is_win_too_small(list);
 		if ((key = is_esc(read_char)))
-		{
 			launch_esc();
-		}
 		else if ((key = is_del(read_char)) && !to_small)
 			launch_del(list, cur);
 		else if ((key = is_arrow(read_char)) && !to_small)

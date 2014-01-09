@@ -1,23 +1,43 @@
 CC			= gcc
+
 NAME		= ft_select
 
 INCLUDE		= ./includes/
 
-SRC			= 	main.c list_fct.c put_fct.c str_fct.c sighandler_fct.c 		\
-				keyhandler_fct.c cursor_fct.c term_fct.c divers_fct.c misc.c \
-				arrow_fct.c effect_fct.c keycheck_fct.c elem_fct.c
+SRCS		= 	main.c				\
+				list_fct.c			\
+				put_fct.c			\
+				str_fct.c			\
+				sighandler_fct.c	\
+				keyhandler_fct.c	\
+				cursor_fct.c		\
+				term_fct.c			\
+				divers_fct.c		\
+				misc.c 				\
+				arrow_fct.c			\
+				effect_fct.c		\
+				keycheck_fct.c		\
+				elem_fct.c
 
-CFLAGS		= -Wall -Werror -Wextra -ltermcap -g
+OBJS		= $(SRCS:.c=.o)
+
+CFLAGS		= -Wall -Werror -Wextra
+
+LFLAGS		= -ltermcap
 
 all:		$(NAME)
 
-$(NAME):
-			@$(CC) $(CFLAGS) -o $(NAME) -I $(INCLUDE) $(SRC)
+%.o:		%.c
+			$(CC) $(CFLAGS) -c $^ -I $(INCLUDE)
+
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS)
 
 clean:
+			rm -rf $(OBJS)
 
 fclean:		clean
-			@rm -rf $(NAME)
+			rm -rf $(NAME)
 
 re:			fclean all
 
