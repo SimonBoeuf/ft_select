@@ -4,7 +4,7 @@ void	ft_error(int err, int fd)
 {
 	if (err == 1)
 		ft_putstr_fd("Error : Insuffisant memory.\n", fd);
-	exit(0);
+	catch_int();
 }
 
 void	ft_bzero(void *s, size_t n)

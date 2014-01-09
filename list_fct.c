@@ -3,9 +3,7 @@
 void				ft_del_list(t_list *list)
 {
 	while (list->nb_elem)
-	{
 		ft_elem_del(list, list->first_elem);
-	}
 	free(list);
 }
 

@@ -78,8 +78,8 @@ int		is_win_too_small(t_list *list)
 	int					nb_col;
 
 	w = ft_get_winsize();
-	nb_col = (list->nb_elem / w.ws_row) + 1;
-	if ((list->nb_elem % w.ws_row) != 0)
+	nb_col = (list->nb_elem / (w.ws_row - 1));
+	if ((list->nb_elem % (w.ws_row - 1)) != 0)
 		nb_col++;
 	return ((nb_col * (((int)list->longest) + 4)) - 4 > (w.ws_col));
 }

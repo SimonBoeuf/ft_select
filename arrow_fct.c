@@ -37,7 +37,10 @@ void	mvleft(t_list *l, t_cursor *c, int y)
 	int	last;
 
 	nbrows = l->nb_elem > y ? y : l->nb_elem;
-	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows) + 1;
+	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows);
+	nbcols = (l->nb_elem / nbrows);
+	if ((l->nb_elem % nbrows) != 0)
+		nbcols++;
 	last = l->nb_elem % nbrows == 0 ? l->nb_elem : l->nb_elem % nbrows;
 	if (nbcols > 1)
 	{
@@ -61,7 +64,10 @@ void	mvright(t_list *l, t_cursor *c, int y)
 	int	last;
 
 	nbrows = l->nb_elem > y ? y : l->nb_elem;
-	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows) + 1;
+	nbcols = y > l->nb_elem ? 1 : (l->nb_elem / nbrows);
+	nbcols = (l->nb_elem / nbrows);
+	if ((l->nb_elem % nbrows) != 0)
+		nbcols++;
 	last = l->nb_elem % nbrows == 0 ? l->nb_elem : l->nb_elem % nbrows;
 	if (nbcols > 1)
 	{
