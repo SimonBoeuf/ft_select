@@ -7,9 +7,15 @@ int					main(int argc, char **argv)
 	t_cursor		*cursor;
 
 	if (argc == 1)
+	{
+		ft_putstr("Usage : ./ft_select arg1 arg2 ...\n");
 		return (-1);
+	}
 	if (tgetent(buffer, getenv("TERM")) < 1)
+	{
+		ft_putstr("No environement detected. Aborted.\n");
 		return (-1);
+	}
 	list = ft_getlist(--argc, ++argv);
 	cursor = init_cursor(0, 0);
 	init_sequence();
