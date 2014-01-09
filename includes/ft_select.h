@@ -128,16 +128,18 @@ void				set_effect(t_elem *elem, int fd);
 /*
 ** misc.c
 */
+void				catch(int s);
+void				catch_term(int s);
 void				readkeys(t_list *list, t_cursor *cur);
 int					is_win_too_small(t_list *list);
 
 /*
 ** sighandler_fct.c
 */
-void				catch(int s);
 void				catch_controle(void);
 void				catch_cont(void);
 void				catch_int(void);
 void				catch_resize(void);
+void				catch_terminate(void);
 
 #endif /* !FT_SELECT_H */

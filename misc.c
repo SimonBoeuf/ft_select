@@ -12,8 +12,32 @@ void	catch(int s)
 		catch_resize();
 }
 
+void	catch_term(int s)
+{
+	if (s)
+		catch_terminate();
+}
+
 void	ft_check_signal(void)
 {
+	signal(SIGINT, catch_term);
+	signal(SIGILL, catch_term);
+	signal(SIGTRAP, catch_term);
+	signal(SIGABRT, catch_term);
+	signal(SIGEMT, catch_term);
+	signal(SIGFPE, catch_term);
+	signal(SIGKILL, catch_term);
+	signal(SIGBUS, catch_term);
+	signal(SIGSEGV, catch_term);
+	signal(SIGSYS, catch_term);
+	signal(SIGPIPE, catch_term);
+	signal(SIGALRM, catch_term);
+	signal(SIGTERM, catch_term);
+	signal(SIGXCPU, catch_term);
+	signal(SIGXFSZ, catch_term);
+	signal(SIGVTALRM, catch_term);
+	signal(SIGUSR1, catch_term);
+	signal(SIGUSR2, catch_term);
 	signal(SIGTSTP, catch);
 	signal(SIGCONT, catch);
 	signal(SIGINT, catch);

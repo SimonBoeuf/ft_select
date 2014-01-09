@@ -2,7 +2,8 @@
 
 int		is_rtn(char *buf)
 {
-	return (buf[0] == 10);
+	return ((buf[0] == 10)
+			|| (buf[0] == 4 && buf[1] == 0 && buf[2] == 0));
 }
 
 int		is_arrow(char *buf)
@@ -14,8 +15,7 @@ int		is_arrow(char *buf)
 
 int		is_esc(char *buf)
 {
-	return ((buf[0] == 27 && buf[1] == 0 && buf[2] == 0)
-			|| (buf[0] == 4 && buf[1] == 0 && buf[2] == 0));
+	return (buf[0] == 27 && buf[1] == 0 && buf[2] == 0);
 }
 
 int		is_space(char *buf)
